@@ -1,0 +1,31 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; background: #f5f6f8; color: #222; }
+a { color: #1d6f42; text-decoration: none; }
+nav.top { background: #1d6f42; color: #fff; padding: 12px 24px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+nav.top a, nav.top button { color: #fff; }
+nav.top .brand { font-weight: bold; font-size: 1.2rem; margin-right: auto; }
+.container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+.card { background: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.08); margin-bottom: 16px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.product img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; background: #ddd; }
+.price { color: #1d6f42; font-weight: bold; }
+label { display: block; margin: 10px 0 4px; font-weight: 600; }
+input, select, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 6px; font: inherit; }
+input[type=checkbox] { width: auto; }
+.btn { display: inline-block; background: #1d6f42; color: #fff; border: 0; padding: 8px 16px; border-radius: 6px; cursor: pointer; font: inherit; }
+.btn-sm { padding: 4px 10px; font-size: .9rem; }
+.btn-danger { background: #c0392b; }
+.btn-grey { background: #777; }
+.btn-link { background: none; border: 0; cursor: pointer; font: inherit; padding: 0; }
+.alert { padding: 10px 14px; border-radius: 6px; margin-bottom: 16px; }
+.alert-success { background: #dff3e4; color: #1d6f42; }
+.alert-error { background: #fbe3e1; color: #a8322a; }
+.error { color: #c0392b; font-size: .9rem; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; }
+.inline { display: inline; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.badge { padding: 2px 8px; border-radius: 10px; background: #eee; font-size: .85rem; }
+.stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
+.stats .num { font-size: 1.8rem; font-weight: bold; color: #1d6f42; }
+.auth-box { max-width: 420px; margin: 40px auto; }
