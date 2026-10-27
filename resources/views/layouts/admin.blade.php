@@ -19,7 +19,7 @@
     {{-- Sidebar (di layar kecil jadi bar atas) --}}
     <aside class="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-stone-900 text-stone-300 lg:flex">
         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 px-6 py-6">
-            <span class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-600 font-extrabold text-white">O</span>
+            <img src="{{ asset('images/brand/icon.svg') }}" alt="Logo {{ config('app.name') }}" class="h-9 w-9 rounded-xl">
             <span class="leading-tight"><span class="block font-extrabold text-white">{{ config('app.name') }}</span><span class="text-xs capitalize text-stone-400">Panel {{ $user->role }}</span></span>
         </a>
         <nav class="flex-1 space-y-1 px-3">

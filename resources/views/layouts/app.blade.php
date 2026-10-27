@@ -9,7 +9,7 @@
 <header class="sticky top-0 z-40 border-b border-stone-200/70 bg-white/80 backdrop-blur-lg">
     <div class="mx-auto flex max-w-6xl items-center gap-4 px-4 py-3">
         <a href="{{ route('home') }}" class="flex items-center gap-2">
-            <span class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-orange-500 to-rose-600 text-lg font-extrabold text-white">O</span>
+            <img src="{{ asset('images/brand/icon.svg') }}" alt="Logo {{ config('app.name') }}" class="h-9 w-9 rounded-xl">
             <span class="leading-tight">
                 <span class="block font-extrabold tracking-tight">{{ config('app.name') }}</span>
                 <span class="hidden text-xs text-stone-500 sm:block">Marketplace UMKM Pemalang</span>
