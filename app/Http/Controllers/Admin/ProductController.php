@@ -72,7 +72,7 @@ class ProductController extends Controller
 
         if ($request->hasFile('image')) {
             // Hapus gambar lama supaya storage tidak penuh file yatim
-            if ($product->image) {
+            if ($product->isUploadedImage()) {
                 Storage::disk('public')->delete($product->image);
             }
             $data['image'] = $request->file('image')->store('products', 'public');
@@ -94,7 +94,7 @@ class ProductController extends Controller
             return back()->with('error', 'Produk sudah ada di transaksi, tidak bisa dihapus. Ubah stok jadi 0 saja.');
         }
 
-        if ($product->image) {
+        if ($product->isUploadedImage()) {
             Storage::disk('public')->delete($product->image);
         }
         $product->delete();

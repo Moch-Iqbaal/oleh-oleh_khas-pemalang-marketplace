@@ -23,14 +23,18 @@ class ProductSeeder extends Seeder
             ['kopi-teh-lereng-moga', 'kopi-teh', 'Teh Tubruk Melati Gaya Poci', 12000, 80, 100, 365, true, 'Teh hitam wangi melati untuk diseduh di poci tanah liat, nikmat dengan gula batu.'],
             ['kopi-teh-lereng-moga', 'kopi-teh', 'Gula Batu Kristal 500g', 15000, 50, 500, 365, false, 'Pasangan wajib teh tubruk.'],
             ['batik-sekar-pemalang', 'batik-pemalang', 'Kain Batik Cap Motif Pemalangan', 125000, 15, 400, null, true, 'Kain batik cap 2 meter dengan motif dan warna khas pesisir Pemalang.'],
-            ['batik-sekar-pemalang', 'batik-pemalang', 'Kemeja Batik Pria Lengan Pendek', 165000, 12, 300, null, false, 'Kemeja katun batik cap, ukuran M sampai XL.'],
+            ['batik-sekar-pemalang', 'batik-pemalang', 'Kemeja Batik Pria Lengan Panjang', 175000, 12, 350, null, false, 'Kemeja katun batik lengan panjang, ukuran M sampai XL.'],
             ['batik-sekar-pemalang', 'batik-pemalang', 'Selendang Batik Tulis', 210000, 6, 150, null, false, 'Selendang batik tulis halus, cocok untuk hadiah.'],
             ['dapur-oleh-oleh-comal', 'hampers-kue', 'Paket Hampers Oleh-Oleh Pemalang', 150000, 10, 1500, 30, false, 'Isi kerupuk, keripik, kopi, dan teh dalam besek bambu.'],
             ['dapur-oleh-oleh-comal', 'hampers-kue', 'Rengginang Ketan 250g', 17000, 30, 250, 60, false, 'Rengginang ketan mentah, tinggal goreng.'],
         ];
 
         foreach ($data as [$storeSlug, $categorySlug, $name, $price, $stock, $weight, $shelf, $featured, $description]) {
-            Product::updateOrCreate(['slug' => Str::slug($name)], [
+            $slug = Str::slug($name);
+            // Foto statis di public/images/products (ikut ter-commit, tetap ada setelah deploy)
+            $image = file_exists(public_path("images/products/{$slug}.webp")) ? "images/products/{$slug}.webp" : null;
+
+            Product::updateOrCreate(['slug' => $slug], [
                 'store_id' => Store::where('slug', $storeSlug)->firstOrFail()->id,
                 'category_id' => Category::where('slug', $categorySlug)->firstOrFail()->id,
                 'name' => $name,
@@ -40,6 +44,7 @@ class ProductSeeder extends Seeder
                 'weight_grams' => $weight,
                 'shelf_life_days' => $shelf,
                 'is_featured' => $featured,
+                'image' => $image,
             ]);
         }
     }

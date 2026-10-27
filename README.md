@@ -120,3 +120,25 @@ tests/Feature/ AuthTest, RoleAccessTest, SellerAccessTest, CheckoutTest
 ```
 
 Alur request: **Route** → **Middleware** (auth, role) → **Controller** (+ FormRequest, Policy) → **Model** (Eloquent ke MySQL) → **View** (Blade) → HTML.
+
+## Kredit Gambar
+
+Foto produk di `public/images/products/` diambil dari Wikimedia Commons, diperkecil ke lebar maks 800px dan dikonversi ke WebP. Foto bersifat ilustrasi (bukan foto produk asli toko).
+
+| File | Sumber | Pembuat | Lisensi |
+|---|---|---|---|
+| `grontol-jagung-gurih.webp` | [Grontol hariadhi.jpg](https://commons.wikimedia.org/wiki/File:Grontol_hariadhi.jpg) | Hariadhi | CC BY-SA 4.0 |
+| `kerupuk-pasir-usek-mentah.webp` | [Kerupuk Pasir.jpg](https://commons.wikimedia.org/wiki/File:Kerupuk_Pasir.jpg) | Ivuvisual | CC BY-SA 4.0 |
+| `keripik-tempe-renyah.webp` | [Keripik tempe.jpg](https://commons.wikimedia.org/wiki/File:Keripik_tempe.jpg) | Wiwik P | CC BY-SA 4.0 |
+| `emping-melinjo-mentah.webp` | [Emping blinjo Sidoarjo.jpg](https://commons.wikimedia.org/wiki/File:Emping_blinjo_Sidoarjo.jpg) | Midori | CC BY 3.0 |
+| `kopi-robusta-moga-bubuk-250g.webp` | [Coffee powdered.jpg](https://commons.wikimedia.org/wiki/File:Coffee_powdered.jpg) | Kulmalukko | CC BY-SA 3.0 |
+| `kopi-robusta-biji-sangrai-500g.webp` | [Roasted coffee beans.jpg](https://commons.wikimedia.org/wiki/File:Roasted_coffee_beans.jpg) | MarkSweep | Public domain |
+| `teh-tubruk-melati-gaya-poci.webp` | [Teh Poci Gula Batu.jpg](https://commons.wikimedia.org/wiki/File:Teh_Poci_Gula_Batu.jpg) | Gunawan Kartapranata | CC BY-SA 4.0 |
+| `gula-batu-kristal-500g.webp` | [Kandiszucker -- 2018 -- 3588.jpg](https://commons.wikimedia.org/wiki/File:Kandiszucker_--_2018_--_3588.jpg) | Dietmar Rabich | CC BY-SA 4.0 |
+| `kain-batik-cap-motif-pemalangan.webp` | [Kain Batik Tulis Lasem Gringsing.jpg](https://commons.wikimedia.org/wiki/File:Kain_Batik_Tulis_Lasem_Gringsing.jpg) | Fredi2025 | CC BY-SA 4.0 |
+| `kemeja-batik-pria-lengan-panjang.webp` | [Kemeja batik Tiga Negeri.jpg](https://commons.wikimedia.org/wiki/File:Kemeja_batik_Tiga_Negeri.jpg) | Rifacan14 | CC BY 4.0 |
+| `selendang-batik-tulis.webp` | [Kain Selendang Batik Tiga Negeri Lasem.jpg](https://commons.wikimedia.org/wiki/File:Kain_Selendang_Batik_Tiga_Negeri_Lasem.jpg) | Candramawa99 | CC BY 4.0 |
+| `paket-hampers-oleh-oleh-pemalang.webp` | [Besek Atau Tumbu Dari Bahan Bambu Di Kebumen Jateng NKRI.jpg](https://commons.wikimedia.org/wiki/File:Besek_Atau_Tumbu_Dari_Bahan_Bambu_Di_Kebumen_Jateng_NKRI.jpg) | SATELIT BM | CC BY-SA 4.0 |
+| `rengginang-ketan-250g.webp` | [Rengginang.jpg](https://commons.wikimedia.org/wiki/File:Rengginang.jpg) | Taman Renyah | CC BY-SA 3.0 |
+
+Lisensi CC BY / CC BY-SA mewajibkan atribusi; gambar yang diperkecil termasuk karya turunan dan dibagikan dengan lisensi yang sama.

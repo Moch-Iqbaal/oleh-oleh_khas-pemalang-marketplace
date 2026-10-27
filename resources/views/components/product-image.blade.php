@@ -9,8 +9,8 @@
     $initial = mb_strtoupper(mb_substr($product->name, 0, 1));
     $gid = 'g'.$product->id;
 @endphp
-@if ($product->image)
-    <img src="{{ asset('storage/'.$product->image) }}" alt="{{ $product->name }}" {{ $attributes->merge(['class' => "w-full object-cover $class"]) }}>
+@if ($url = $product->imageUrl())
+    <img src="{{ $url }}" loading="lazy" alt="{{ $product->name }}" {{ $attributes->merge(['class' => "w-full object-cover $class"]) }}>
 @else
     <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="{{ $product->name }}" {{ $attributes->merge(['class' => "w-full $class"]) }}>
         <defs>

@@ -38,6 +38,28 @@ class Product extends Model
     }
 
     // Hanya produk dari toko yang sudah diverifikasi yang boleh tampil di etalase
+    /**
+     * URL gambar produk. Gambar seeder disimpan di public/images (path diawali "images/"),
+     * gambar upload ada di disk public (storage). Null kalau tidak ada gambar.
+     */
+    public function imageUrl(): ?string
+    {
+        if (! $this->image) {
+            return null;
+        }
+
+        if (str_starts_with($this->image, 'images/')) {
+            return file_exists(public_path($this->image)) ? asset($this->image) : null;
+        }
+
+        return asset('storage/'.$this->image);
+    }
+
+    public function isUploadedImage(): bool
+    {
+        return $this->image && ! str_starts_with($this->image, 'images/');
+    }
+
     public function scopeVisible(Builder $query): Builder
     {
         return $query->whereHas('store', fn ($q) => $q->where('is_verified', true));
