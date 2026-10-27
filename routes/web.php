@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -18,5 +19,13 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [LoginController::class, 'destroy'])->middleware('auth')->name('logout');
 
-// Sementara, diganti dengan dashboard asli nanti
-Route::get('/admin', fn () => 'Dashboard')->middleware('auth')->name('admin.dashboard');
+// Panel admin: admin dan staff boleh masuk
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin,staff'])->group(function () {
+    Route::get('/', fn () => 'Dashboard')->name('dashboard');
+
+    // Khusus admin: kelola role user
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::patch('/users/{user}/role', [UserController::class, 'updateRole'])->name('users.role');
+    });
+});
