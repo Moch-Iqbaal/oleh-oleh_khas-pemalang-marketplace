@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\UserController;
@@ -43,7 +44,7 @@ Route::middleware('auth')->group(function () {
 
 // Panel admin: admin dan staff boleh masuk
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin,staff'])->group(function () {
-    Route::get('/', fn () => 'Dashboard')->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('categories', CategoryController::class)->except('show');
     Route::resource('products', ProductController::class)->except('show');
