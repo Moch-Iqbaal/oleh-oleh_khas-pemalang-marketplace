@@ -1,39 +1,54 @@
-# UMKM Shop — E-Commerce UMKM Lokal
+# Oleh-Oleh Pemalang — Marketplace UMKM Khas Pemalang
 
-Aplikasi web e-commerce sederhana untuk UMKM lokal, dibuat dengan **Laravel** dan **MySQL** memakai pola **MVC**.
-Tugas UAS Web Application Development (WAD04), Universitas Cakrawala.
+> Bawa pulang rasa Pemalang, ke mana pun kamu pergi.
+
+Marketplace oleh-oleh tempat banyak UMKM Kabupaten Pemalang berjualan: camilan dan kerupuk, kopi dan teh, batik, sampai paket hampers.
+Ditujukan untuk perantau, wisatawan, dan warga lokal yang ingin mengirim hadiah dari Pemalang.
+
+Dibuat dengan **Laravel** dan **MySQL** dengan pola **MVC**, untuk tugas UAS Web Application Development (WAD04), Universitas Cakrawala.
 
 ## Fitur
 
-- Registrasi, login, logout (session di-regenerate setelah login, login dibatasi 5 percobaan/menit)
-- Hak akses berbasis role: **admin**, **staff**, **customer** (middleware `role:`)
-- CRUD kategori dan produk (validasi FormRequest, upload gambar, slug unik, pencarian, pagination)
-- Toko: daftar produk per kategori, pencarian, detail produk
-- Keranjang belanja berbasis session
-- Checkout di dalam `DB::transaction` dengan `lockForUpdate` (cek stok aman dari race condition), kode invoice, snapshot harga, pengurangan stok
-- Riwayat pesanan customer, daftar pesanan + ubah status untuk admin/staff
-- Dashboard admin: total produk, customer, pesanan, pesanan pending, pendapatan, stok menipis
-- Keamanan: CSRF di semua form, escaping Blade `{{ }}`, query Eloquent (parameter binding), policy pesanan, halaman error 403/404/419/500, pesan validasi Bahasa Indonesia
+- **Auth**: registrasi pembeli atau **daftar sebagai penjual** (sekaligus membuat toko yang menunggu verifikasi), login, logout. Session di-regenerate setelah login, login dibatasi 5 percobaan/menit
+- **Role**: admin, staff (moderator platform), seller (pemilik toko), customer. Role dari form registrasi di-whitelist (hanya `customer` atau `seller`)
+- **Toko UMKM**: tiap seller punya satu toko (`stores`), admin memverifikasi toko. Produk toko yang belum diverifikasi tidak tampil
+- **Produk**: CRUD dengan FormRequest, upload gambar (jpg/png/webp maks 2 MB), slug unik, berat (gram), daya tahan (hari), tanda unggulan, pencarian, filter kategori, pagination
+- **Etalase**: hero, produk unggulan, chip kategori, halaman detail, halaman toko `/toko/{slug}`, placeholder gambar SVG lokal
+- **Keranjang** di session, dikelompokkan per toko
+- **Checkout** di dalam `DB::transaction` + `lockForUpdate`: cek stok, **satu pesanan per toko**, kode invoice, snapshot harga, stok berkurang
+- **Pesanan**: riwayat pesanan customer; seller melihat dan mengubah status pesanan tokonya; admin/staff melihat semua
+- **Dashboard** dengan kartu statistik (per toko untuk seller, seluruh marketplace untuk admin/staff)
+- **Keamanan**: CSRF di semua form, escaping Blade `{{ }}`, Eloquent (parameter binding), Policy (`ProductPolicy`, `TransactionPolicy`), halaman error 403/404/419/500, pesan validasi Bahasa Indonesia
 
 ## Hak Akses
 
-| Fitur | Admin | Staff | Customer | Tamu |
-|---|:-:|:-:|:-:|:-:|
-| Lihat produk | ✅ | ✅ | ✅ | ✅ |
-| Keranjang & checkout | ❌ | ❌ | ✅ | ❌ |
-| Riwayat pesanan sendiri | — | — | ✅ | ❌ |
-| Dashboard admin | ✅ | ✅ | ❌ | ❌ |
-| CRUD kategori & produk | ✅ | ✅ | ❌ | ❌ |
-| Lihat & ubah status pesanan | ✅ | ✅ | ❌ | ❌ |
-| Kelola role user | ✅ | ❌ | ❌ | ❌ |
+| Fitur | Admin | Staff | Seller | Customer | Tamu |
+|---|:-:|:-:|:-:|:-:|:-:|
+| Lihat etalase & halaman toko | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Keranjang & checkout | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Riwayat pesanan sendiri | — | — | — | ✅ | ❌ |
+| Panel & dashboard | ✅ | ✅ | ✅ (tokonya) | ❌ | ❌ |
+| CRUD produk | ✅ semua | ✅ semua | ✅ milik tokonya | ❌ | ❌ |
+| Lihat & ubah status pesanan | ✅ semua | ✅ semua | ✅ pesanan tokonya | ❌ | ❌ |
+| Edit profil toko | — | — | ✅ | ❌ | ❌ |
+| CRUD kategori | ✅ | ✅ | ❌ | ❌ | ❌ |
+| Verifikasi toko & kelola role user | ✅ | ❌ | ❌ | ❌ | ❌ |
 
 ## Akun Login (data seeder)
 
-| Role | Email | Password |
+Semua password: `password123`
+
+| Role | Email | Keterangan |
 |---|---|---|
-| Admin | admin@umkm.test | password123 |
-| Staff | staff@umkm.test | password123 |
-| Customer | customer@umkm.test | password123 |
+| Admin | admin@umkm.test | Pengelola platform |
+| Staff | staff@umkm.test | Moderator |
+| Customer | customer@umkm.test | Pembeli |
+| Seller | seller@umkm.test | Camilan Mbok Darmi (terverifikasi) |
+| Seller | kopi@umkm.test | Kopi & Teh Lereng Moga (terverifikasi) |
+| Seller | batik@umkm.test | Batik Sekar Pemalang (terverifikasi) |
+| Seller | comal@umkm.test | Dapur Oleh-Oleh Comal (**belum** terverifikasi, untuk contoh alur verifikasi) |
+
+Nama toko dan alamat di seeder adalah data contoh (fiktif).
 
 ## Instalasi Lokal
 
@@ -55,15 +70,15 @@ php artisan storage:link        # supaya gambar produk bisa diakses
 php artisan serve
 ```
 
-Buka http://127.0.0.1:8000.
+Buka http://127.0.0.1:8000. Tampilan memakai Tailwind CSS dan Google Font lewat CDN, jadi perlu internet.
 
-Alternatif tanpa migration: import `database/umkm_shop.sql` ke database `umkm_shop`.
+Alternatif tanpa migration: import `database/umkm_shop.sql`.
 
 ```bash
 mysql -u root -p umkm_shop < database/umkm_shop.sql
 ```
 
-Menjalankan test (memakai SQLite in-memory, tidak menyentuh database MySQL):
+Menjalankan test (SQLite in-memory, tidak menyentuh database MySQL):
 
 ```bash
 php artisan test
@@ -71,10 +86,11 @@ php artisan test
 
 ## Struktur Database
 
-- `users` (id, name, email, password, role)
+- `users` (id, name, email, password, role: admin/staff/seller/customer)
+- `stores` (id, user_id → users **unique**, name, slug, description, address, phone, is_verified)
 - `categories` (id, name, slug)
-- `products` (id, category_id → categories, name, slug, description, price, stock, image)
-- `transactions` (id, user_id → users, invoice_code, total, status)
+- `products` (id, store_id → stores, category_id → categories, name, slug, description, price, stock, weight_grams, shelf_life_days, is_featured, image)
+- `transactions` (id, user_id → users, store_id → stores, invoice_code, total, status)
 - `transaction_items` (id, transaction_id → transactions, product_id → products, qty, price = snapshot harga)
 
 ## Struktur MVC
@@ -84,22 +100,23 @@ app/
 ├── Http/
 │   ├── Controllers/
 │   │   ├── Auth/LoginController.php, RegisterController.php
-│   │   ├── Admin/DashboardController.php, CategoryController.php,
-│   │   │        ProductController.php, OrderController.php, UserController.php
-│   │   ├── ShopController.php       # daftar & detail produk
+│   │   ├── Admin/DashboardController.php, ProductController.php, CategoryController.php,
+│   │   │        OrderController.php, StoreController.php, MyStoreController.php, UserController.php
+│   │   ├── ShopController.php       # etalase, detail produk, halaman toko
 │   │   ├── CartController.php       # keranjang (session)
-│   │   ├── CheckoutController.php   # proses checkout
-│   │   └── OrderController.php      # riwayat pesanan customer
-│   ├── Middleware/EnsureRole.php    # middleware role:admin,staff
+│   │   ├── CheckoutController.php   # checkout, dipecah per toko
+│   │   └── OrderController.php      # riwayat & detail pesanan
+│   ├── Middleware/EnsureRole.php    # middleware role:admin,staff,seller
 │   └── Requests/CategoryRequest.php, ProductRequest.php
-├── Models/User.php, Category.php, Product.php, Transaction.php, TransactionItem.php
-└── Policies/TransactionPolicy.php
-resources/views/                    # View (Blade)
-├── layouts/ (app, admin)
+├── Models/User, Store, Category, Product, Transaction, TransactionItem
+└── Policies/ProductPolicy.php, TransactionPolicy.php
+resources/views/
+├── layouts/ (app, admin, head)
+├── components/ (product-card, product-image, flash, status-badge)
 ├── auth/, shop/, orders/, admin/, errors/
-routes/web.php                       # Routing
+routes/web.php
 database/migrations, seeders, umkm_shop.sql
-tests/Feature/                       # AuthTest, RoleAccessTest, CheckoutTest
+tests/Feature/ AuthTest, RoleAccessTest, SellerAccessTest, CheckoutTest
 ```
 
-Alur request: **Route** (`routes/web.php`) → **Middleware** (auth, role) → **Controller** → **Model** (Eloquent ke MySQL) → **View** (Blade) → response HTML.
+Alur request: **Route** → **Middleware** (auth, role) → **Controller** (+ FormRequest, Policy) → **Model** (Eloquent ke MySQL) → **View** (Blade) → HTML.
