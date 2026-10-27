@@ -10,6 +10,12 @@
 <nav class="top">
     <a href="{{ url('/') }}" class="brand">UMKM Shop</a>
     @auth
+        @if (auth()->user()->role === 'customer')
+            <a href="{{ route('cart.index') }}">Keranjang ({{ count(session('cart', [])) }})</a>
+            <a href="{{ route('orders.index') }}">Pesanan Saya</a>
+        @else
+            <a href="{{ route('admin.dashboard') }}">Panel Admin</a>
+        @endif
         <span>Halo, {{ auth()->user()->name }}</span>
         <form action="{{ route('logout') }}" method="POST" class="inline">
             @csrf
