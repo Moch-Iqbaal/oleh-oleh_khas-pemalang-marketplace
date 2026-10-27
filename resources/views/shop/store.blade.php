@@ -1,0 +1,24 @@
+@extends('layouts.app')
+@section('title', $store->name)
+@section('content')
+<section class="bg-gradient-to-br from-emerald-50 to-teal-50">
+    <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-12 sm:flex-row sm:items-center">
+        <span class="grid h-20 w-20 shrink-0 place-items-center rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-600 text-3xl font-extrabold text-white shadow-lg">{{ mb_substr($store->name, 0, 1) }}</span>
+        <div>
+            <h1 class="text-3xl font-extrabold tracking-tight">{{ $store->name }} <span class="text-emerald-600" title="Terverifikasi">✔</span></h1>
+            <p class="mt-1 text-stone-600">{{ $store->description }}</p>
+            <p class="mt-2 text-sm text-stone-500">📍 {{ $store->address }} · 📞 {{ $store->phone }}</p>
+        </div>
+    </div>
+</section>
+<div class="mx-auto max-w-6xl px-4 py-10">
+    <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        @forelse ($products as $product)
+            <x-product-card :product="$product->setRelation('store', $store)" />
+        @empty
+            <p class="col-span-full text-stone-500">Toko ini belum punya produk.</p>
+        @endforelse
+    </div>
+    {{ $products->links('pagination') }}
+</div>
+@endsection

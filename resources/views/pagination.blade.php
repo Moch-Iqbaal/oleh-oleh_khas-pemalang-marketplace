@@ -1,15 +1,15 @@
 @if ($paginator->hasPages())
-<div class="row" style="margin-top:12px">
+<nav class="mt-8 flex items-center justify-center gap-3 text-sm">
     @if ($paginator->onFirstPage())
-        <span class="badge">&laquo; Sebelumnya</span>
+        <span class="rounded-full px-4 py-2 text-stone-400 ring-1 ring-stone-200">← Sebelumnya</span>
     @else
-        <a class="badge" href="{{ $paginator->previousPageUrl() }}">&laquo; Sebelumnya</a>
+        <a href="{{ $paginator->previousPageUrl() }}" class="rounded-full bg-white px-4 py-2 font-medium ring-1 ring-stone-200 hover:ring-orange-400">← Sebelumnya</a>
     @endif
-    <span>Halaman {{ $paginator->currentPage() }} dari {{ $paginator->lastPage() }}</span>
+    <span class="text-stone-500">{{ $paginator->currentPage() }} / {{ $paginator->lastPage() }}</span>
     @if ($paginator->hasMorePages())
-        <a class="badge" href="{{ $paginator->nextPageUrl() }}">Berikutnya &raquo;</a>
+        <a href="{{ $paginator->nextPageUrl() }}" class="rounded-full bg-white px-4 py-2 font-medium ring-1 ring-stone-200 hover:ring-orange-400">Berikutnya →</a>
     @else
-        <span class="badge">Berikutnya &raquo;</span>
+        <span class="rounded-full px-4 py-2 text-stone-400 ring-1 ring-stone-200">Berikutnya →</span>
     @endif
-</div>
+</nav>
 @endif
