@@ -58,7 +58,7 @@ class ProductSeeder extends Seeder
 
             ['kopi-teh-lereng-moga', 'gula-manisan', 'Manisan Pepaya Moga', 20000, 30, 250, 30, true, 'Manisan pepaya kering dari Moga, manis dan kenyal.'],
             ['kopi-teh-lereng-moga', 'kopi-teh', 'Wedang Jahe Instan', 18000, 50, 200, 365, false, 'Serbuk jahe merah dan gula untuk wedang jahe hangat.'],
-            ['kopi-teh-lereng-moga', 'gula-manisan', 'Nanas Madu Pemalang', 15000, 40, 1200, 7, false, 'Nanas madu segar yang manis, harga per buah.'],
+            ['gula-aren-lestari-watukumpul', 'gula-manisan', 'Nanas Madu Belik', 15000, 40, 1200, 7, false, 'Nanas madu segar dari kebun Belik, sentra nanas Pemalang. Harga per buah.'],
 
             ['gula-aren-lestari-watukumpul', 'gula-manisan', 'Gula Aren Cetak Bongas 1kg', 32000, 50, 1000, 180, true, 'Gula aren padat dari Desa Bongas, Watukumpul. Dimasak dengan kayu bakar tanpa campuran, isi 5 linting.'],
             ['gula-aren-lestari-watukumpul', 'gula-manisan', 'Gula Aren Cair 250ml', 25000, 40, 300, 180, false, 'Gula aren cair untuk kopi, es, dan kue.'],
@@ -67,7 +67,7 @@ class ProductSeeder extends Seeder
             ['hasil-laut-tanjungsari', 'olahan-laut', 'Ikan Asin Jambal 250g', 40000, 25, 250, 90, false, 'Ikan asin jambal kering untuk digoreng atau dibakar.'],
             ['hasil-laut-tanjungsari', 'olahan-laut', 'Terasi Udang Rebon', 15000, 40, 200, 180, false, 'Terasi dari udang rebon untuk sambal dan masakan.'],
             ['hasil-laut-tanjungsari', 'olahan-laut', 'Kerupuk Udang Mentah 500g', 35000, 30, 500, 120, false, 'Kerupuk udang mentah, mekar besar saat digoreng.'],
-            ['hasil-laut-tanjungsari', 'olahan-laut', 'Abon Sapi 100g', 35000, 25, 100, 90, false, 'Abon daging sapi manis gurih.'],
+            ['dapur-oleh-oleh-comal', 'olahan-laut', 'Abon Sapi 100g', 35000, 25, 100, 90, false, 'Abon daging sapi manis gurih.'],
 
             ['batik-canting-lestari', 'batik-pemalang', 'Sarung Batik Cap', 135000, 15, 450, null, false, 'Sarung batik cap katun, nyaman untuk sehari-hari.'],
             ['batik-canting-lestari', 'batik-pemalang', 'Kain Batik Tulis 2 Meter', 250000, 8, 400, null, false, 'Kain batik tulis halus, panjang 2 meter.'],

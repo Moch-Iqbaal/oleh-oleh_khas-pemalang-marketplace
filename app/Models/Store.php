@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Store extends Model
 {
     protected $fillable = [
-        'user_id', 'name', 'slug', 'description', 'photo', 'address', 'latitude', 'longitude', 'phone', 'is_verified',
+        'user_id', 'name', 'slug', 'description', 'photo', 'place_name', 'address', 'latitude', 'longitude', 'phone', 'is_verified',
     ];
 
     protected $casts = [
@@ -56,5 +56,12 @@ class Store extends Model
     public function scopeVerified(Builder $query): Builder
     {
         return $query->where('is_verified', true);
+    }
+
+    public function mapsUrl(): string
+    {
+        $query = $this->place_name ? $this->place_name.', Pemalang' : $this->latitude.','.$this->longitude;
+
+        return 'https://www.google.com/maps/search/?api=1&query='.rawurlencode($query);
     }
 }

@@ -69,10 +69,10 @@ class StoreProfileTest extends TestCase
     public function test_halaman_toko_menampilkan_peta_dan_link_google_maps(): void
     {
         $seller = $this->seller();
-        $seller->store->update(['latitude' => -6.9013234, 'longitude' => 109.4057555]);
+        $seller->store->update(['place_name' => 'Pasar Moga', 'latitude' => -7.1235743, 'longitude' => 109.2463483]);
 
         $this->get('/toko/toko-a')->assertOk()
             ->assertSee('openstreetmap.org/export/embed.html', false)
-            ->assertSee('https://www.google.com/maps?q=-6.9013234,109.4057555', false);
+            ->assertSee('https://www.google.com/maps/search/?api=1&amp;query=Pasar%20Moga%2C%20Pemalang', false);
     }
 }

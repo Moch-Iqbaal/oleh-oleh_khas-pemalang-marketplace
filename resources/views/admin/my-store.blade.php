@@ -20,6 +20,11 @@
             @error($field) <p class="mt-1 text-sm text-rose-600">{{ $message }}</p> @enderror
         </div>
     @endforeach
+    <div>
+        <label for="place_name" class="text-sm font-semibold">Nama tempat di Google Maps (contoh: Pasar Moga)</label>
+        <input type="text" name="place_name" id="place_name" value="{{ old('place_name', $store->place_name) }}" class="{{ $input }}">
+        @error('place_name') <p class="mt-1 text-sm text-rose-600">{{ $message }}</p> @enderror
+    </div>
     <div class="grid gap-4 sm:grid-cols-2">
         @foreach ([['latitude', 'Latitude (contoh -6.8873513)'], ['longitude', 'Longitude (contoh 109.3882311)']] as [$field, $label])
             <div>

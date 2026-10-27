@@ -52,7 +52,7 @@ Semua password: `password123`
 | Seller | laut@umkm.test | Hasil Laut Tanjungsari (terverifikasi) |
 | Seller | bambu@umkm.test | Anyaman Bambu Randudongkal (**belum** terverifikasi, untuk contoh alur verifikasi) |
 
-Nama toko di seeder fiktif. Lokasi toko memakai tempat publik di sentra produk aslinya (pasar, desa sentra, TPI, jalan), bukan alamat usaha tertentu. Lihat bagian Sumber Data Riset.
+Nama toko di seeder fiktif. Setiap toko berupa kios di tempat publik bernama yang ada di Google Maps (pasar, TPI, alun-alun), dan produknya sesuai yang dijual di tempat itu. Link "Buka di Google Maps" mencari nama tempat, bukan koordinat. Lihat bagian Sumber Data Riset.
 
 ## Instalasi Lokal
 
@@ -202,7 +202,7 @@ Foto produk di `public/images/products/`, foto toko di `public/images/stores/`, 
 | `kue-putu-ayu-isi-12.webp` | [Putri Ayu.jpg](https://commons.wikimedia.org/wiki/File:Putri_Ayu.jpg) | Supardisahabu | CC BY-SA 4.0 |
 | `kue-satu-kacang-hijau.webp` | [Kue satu.JPG](https://commons.wikimedia.org/wiki/File:Kue_satu.JPG) | Midori | CC BY 3.0 |
 | `manisan-pepaya-moga.webp` | [Alua dari Pepaya.jpg](https://commons.wikimedia.org/wiki/File:Alua_dari_Pepaya.jpg) | Mia Sulisnawati | CC BY-SA 4.0 |
-| `nanas-madu-pemalang.webp` | [Nanas Madu.jpg](https://commons.wikimedia.org/wiki/File:Nanas_Madu.jpg) | Revianashafira | CC BY 4.0 |
+| `nanas-madu-belik.webp` | [Nanas Madu.jpg](https://commons.wikimedia.org/wiki/File:Nanas_Madu.jpg) | Revianashafira | CC BY 4.0 |
 | `nastar-selai-nanas-toples.webp` | [Tat nanas (Pineapple tart) 20230425 084103.jpg](https://commons.wikimedia.org/wiki/File:Tat_nanas_(Pineapple_tart)_20230425_084103.jpg) | Wiki Farazi | CC0 |
 | `opak-singkong-bakar.webp` | [Karupuak Lento 2.jpg](https://commons.wikimedia.org/wiki/File:Karupuak_Lento_2.jpg) | S Kartika | CC BY-SA 4.0 |
 | `paket-nasi-grombyang-siap-saji.webp` | [Sega Grombyang.jpg](https://commons.wikimedia.org/wiki/File:Sega_Grombyang.jpg) | Ronald Sumardi | CC BY 4.0 |
@@ -231,3 +231,15 @@ Foto toko adalah suasana usaha/produksi (bukan foto pemilik toko yang fiktif).
 | `highlight/nasi-grombyang.webp` | [Sega Grombyang.jpg](https://commons.wikimedia.org/wiki/File:Sega_Grombyang.jpg) | Ronald Sumardi | CC BY 4.0 |
 
 Lisensi CC BY / CC BY-SA mewajibkan atribusi; gambar yang diperkecil termasuk karya turunan dan dibagikan dengan lisensi yang sama.
+
+### Lokasi toko (pembaruan)
+
+| Toko (fiktif) | Tempat | Koordinat | Sumber |
+| --- | --- | --- | --- |
+| Camilan Mbok Darmi, Anyaman Bambu Randudongkal | Pasar Randudongkal | -7.1036051, 109.3244742 | OSM/Nominatim "Pasar Randudongkal"; daftar pasar daerah Diskoperindag (Perbup Pemalang 74/2018) |
+| Kopi & Teh Lereng Moga | Pasar Moga | -7.1235743, 109.2463483 | OSM/Nominatim "Pasar Moga"; Perbup 74/2018 |
+| Batik Canting Lestari | Pasar Pagi Pemalang | -6.8890280, 109.3911390 | Listing Google Maps Jl. Mawar, Mulyoharjo (mirror exa.ai/library/place/n6klp3f4fg4, id.maptons.com/p/5987905648); tidak dipetakan di OSM |
+| Dapur Oleh-Oleh Comal | Pasar Comal | -6.9057, 109.5334 | Listing Google Maps Posongan, Purwoharjo (exa.ai place listing di sekitar pasar); Perbup 74/2018 |
+| Grombyang & Kamir Semeru | Alun-Alun Pemalang | -6.8902901, 109.3806267 | OSM/Nominatim "Alun-Alun Pemalang" |
+| Gula Aren Lestari Watukumpul | Pasar Belik | -7.1870190, 109.3295400 | Listing Google Maps (exa.ai/library/place/gxv9lpw7nv7); pemalangkab.go.id, radarcbs.com |
+| Hasil Laut Tanjungsari | TPI Tanjungsari Pemalang | -6.8685483, 109.3684456 | OSM/Nominatim "TPI Tanjungsari Pemalang"; pemalangkab.go.id (Dinas Perikanan, 5 TPI); Disway Jateng |

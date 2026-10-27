@@ -6,7 +6,7 @@
         <p class="mt-1 text-sm text-stone-600">{{ $store->address }}</p>
         @if ($store->hasLocation())
             <p class="mt-2 text-sm font-semibold text-orange-600 js-distance" data-lat="{{ $store->latitude }}" data-lng="{{ $store->longitude }}">Menghitung jarak dari lokasi kamu...</p>
-            <a href="https://www.google.com/maps?q={{ $store->latitude }},{{ $store->longitude }}" target="_blank" rel="noopener" class="mt-2 inline-block text-sm font-semibold text-emerald-700 hover:underline">Buka di Google Maps →</a>
+            <a href="{{ $store->mapsUrl() }}" target="_blank" rel="noopener" class="mt-2 inline-block text-sm font-semibold text-emerald-700 hover:underline">Buka di Google Maps →</a>
         @endif
     </div>
     @if ($store->hasLocation())

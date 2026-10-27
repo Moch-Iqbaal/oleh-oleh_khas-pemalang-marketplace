@@ -24,6 +24,7 @@ class MyStoreController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'min:3', 'max:100', Rule::unique('stores', 'name')->ignore($store->id)],
             'description' => ['nullable', 'string', 'max:1000'],
+            'place_name' => ['nullable', 'string', 'max:120'],
             'address' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'regex:/^[0-9+ ]{8,20}$/'],
             // Koordinat boleh kosong, tapi kalau diisi harus berpasangan dan dalam rentang valid
