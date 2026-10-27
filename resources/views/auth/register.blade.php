@@ -14,7 +14,7 @@
             <div class="grid grid-cols-2 gap-3">
                 @foreach (['customer' => ['fa-bag-shopping', 'Pembeli'], 'seller' => ['fa-store', 'Penjual']] as $value => [$icon, $label])
                     <label class="cursor-pointer">
-                        <input type="radio" name="account_type" value="{{ $value }}" class="peer sr-only" @checked($type === $value) onchange="document.getElementById('store-fields').classList.toggle('hidden', this.value !== 'seller')">
+                        <input type="radio" name="account_type" value="{{ $value }}" class="peer sr-only" @checked($type === $value) data-toggle-target="store-fields" data-toggle-when="seller">
                         <span class="block rounded-2xl p-4 text-center ring-1 ring-stone-200 peer-checked:bg-orange-50 peer-checked:ring-2 peer-checked:ring-orange-500">
                             <span class="text-2xl"><i class="fa-solid {{ $icon }}" aria-hidden="true"></i></span>
                             <span class="mt-1 block text-sm font-semibold">{{ $label === 'Penjual' ? 'Daftar sebagai penjual' : 'Daftar sebagai pembeli' }}</span>

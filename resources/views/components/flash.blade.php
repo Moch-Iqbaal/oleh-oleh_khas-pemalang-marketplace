@@ -5,7 +5,7 @@
             <div class="toast pointer-events-auto flex items-start gap-3 rounded-2xl {{ $color }} px-4 py-3 text-sm font-medium text-white shadow-lg transition duration-500">
                 <i class="fa-solid {{ $type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation' }}" aria-hidden="true"></i>
                 <p class="flex-1">{{ session($type) }}</p>
-                <button type="button" onclick="this.parentElement.remove()" class="opacity-70 hover:opacity-100" aria-label="Tutup"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                <button type="button" data-dismiss class="opacity-70 hover:opacity-100" aria-label="Tutup"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
             </div>
         @endif
     @endforeach
@@ -15,6 +15,10 @@
         </div>
     @endif
 </div>
-<script>
+<script nonce="{{ $cspNonce ?? '' }}">
+    // Pengganti handler inline (onclick/onsubmit/onchange) supaya CSP tidak perlu 'unsafe-inline' untuk script
+    document.addEventListener('click', e => { const b = e.target.closest('[data-dismiss]'); if (b) b.parentElement.remove(); });
+    document.addEventListener('submit', e => { const f = e.target.closest('form[data-confirm]'); if (f && !confirm(f.dataset.confirm)) e.preventDefault(); });
+    document.addEventListener('change', e => { const t = e.target.closest('[data-toggle-target]'); if (t) document.getElementById(t.dataset.toggleTarget).classList.toggle('hidden', t.value !== t.dataset.toggleWhen); });
     setTimeout(() => document.querySelectorAll('.toast').forEach(t => { t.style.opacity = 0; setTimeout(() => t.remove(), 500); }), 4000);
 </script>

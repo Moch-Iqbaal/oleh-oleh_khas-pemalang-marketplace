@@ -19,7 +19,7 @@
     @endif
 </div>
 @once
-<script>
+<script nonce="{{ $cspNonce ?? '' }}">
 // Hitung jarak lurus (Haversine) dari lokasi browser ke toko. Lokasi pembeli tidak dikirim ke server.
 (function () {
     const els = document.querySelectorAll('.js-distance');
