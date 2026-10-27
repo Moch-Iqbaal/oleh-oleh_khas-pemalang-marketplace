@@ -23,21 +23,22 @@ Route::get('/toko/{store:slug}', [ShopController::class, 'store'])->name('shop.s
 // Halaman auth hanya untuk tamu (belum login)
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegisterController::class, 'create'])->name('register');
-    Route::post('/register', [RegisterController::class, 'store']);
+    Route::post('/register', [RegisterController::class, 'store'])->middleware('throttle:5,1');
     Route::get('/login', [LoginController::class, 'create'])->name('login');
-    Route::post('/login', [LoginController::class, 'store']);
+    // Selain limiter per email+IP di controller, batasi juga total request per IP
+    Route::post('/login', [LoginController::class, 'store'])->middleware('throttle:20,1');
 });
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
     // Belanja khusus customer
-    Route::middleware('role:customer')->group(function () {
+    Route::middleware(['role:customer', 'throttle:60,1'])->group(function () {
         Route::get('/keranjang', [CartController::class, 'index'])->name('cart.index');
         Route::post('/keranjang/{product}', [CartController::class, 'add'])->name('cart.add');
         Route::patch('/keranjang/{product}', [CartController::class, 'update'])->name('cart.update');
         Route::delete('/keranjang/{product}', [CartController::class, 'remove'])->name('cart.remove');
-        Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout');
+        Route::post('/checkout', [CheckoutController::class, 'store'])->middleware('throttle:10,1')->name('checkout');
         Route::get('/pesanan', [OrderController::class, 'index'])->name('orders.index');
     });
 
