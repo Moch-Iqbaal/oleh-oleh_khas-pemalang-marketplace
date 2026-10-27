@@ -10,13 +10,18 @@ class Transaction extends Model
 {
     public const STATUSES = ['pending', 'paid', 'shipped', 'done', 'cancelled'];
 
-    protected $fillable = ['user_id', 'invoice_code', 'total', 'status'];
+    protected $fillable = ['user_id', 'store_id', 'invoice_code', 'total', 'status'];
 
     protected $casts = ['total' => 'decimal:2'];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function store(): BelongsTo
+    {
+        return $this->belongsTo(Store::class);
     }
 
     public function items(): HasMany

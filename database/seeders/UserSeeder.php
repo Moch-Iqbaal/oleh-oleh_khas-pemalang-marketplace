@@ -11,9 +11,14 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $users = [
-            ['name' => 'Admin Toko', 'email' => 'admin@umkm.test', 'role' => 'admin'],
-            ['name' => 'Staff Gudang', 'email' => 'staff@umkm.test', 'role' => 'staff'],
-            ['name' => 'Budi Pembeli', 'email' => 'customer@umkm.test', 'role' => 'customer'],
+            ['name' => 'Admin Platform', 'email' => 'admin@umkm.test', 'role' => 'admin'],
+            ['name' => 'Staff Moderator', 'email' => 'staff@umkm.test', 'role' => 'staff'],
+            ['name' => 'Budi Perantau', 'email' => 'customer@umkm.test', 'role' => 'customer'],
+            // Pemilik toko UMKM (lihat StoreSeeder)
+            ['name' => 'Bu Darmi', 'email' => 'seller@umkm.test', 'role' => 'seller'],
+            ['name' => 'Pak Slamet', 'email' => 'kopi@umkm.test', 'role' => 'seller'],
+            ['name' => 'Mbak Sekar', 'email' => 'batik@umkm.test', 'role' => 'seller'],
+            ['name' => 'Mas Arif', 'email' => 'comal@umkm.test', 'role' => 'seller'],
         ];
 
         foreach ($users as $user) {

@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
         // Urutan penting: produk butuh kategori sudah ada
         $this->call([
             UserSeeder::class,
+            StoreSeeder::class,
             CategorySeeder::class,
             ProductSeeder::class,
         ]);
