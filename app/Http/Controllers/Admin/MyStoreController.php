@@ -32,7 +32,7 @@ class MyStoreController extends Controller
             // Koordinat boleh kosong, tapi kalau diisi harus berpasangan dan dalam rentang valid
             'latitude' => ['nullable', 'required_with:longitude', 'numeric', 'between:-90,90'],
             'longitude' => ['nullable', 'required_with:latitude', 'numeric', 'between:-180,180'],
-            'photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'photo' => ['nullable', 'file', 'image', 'mimes:jpg,jpeg,png,webp', 'mimetypes:image/jpeg,image/png,image/webp', 'dimensions:min_width=100,min_height=100,max_width=6000,max_height=6000', 'max:2048'],
         ]);
 
         if ($request->hasFile('photo')) {

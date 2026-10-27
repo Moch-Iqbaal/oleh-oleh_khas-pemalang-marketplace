@@ -1,0 +1,10 @@
+# Folder upload: hanya file statis. Jangan jalankan script, dan jangan biarkan browser menebak tipe file.
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+</IfModule>
+<FilesMatch "\.(php|phtml|phar|svg|html?)$">
+    Require all denied
+</FilesMatch>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>

@@ -46,7 +46,7 @@ class ProductRequest extends FormRequest
             'shelf_life_days' => ['nullable', 'integer', 'min:1', 'max:3650'],
             'is_featured' => ['boolean'],
             // Hanya gambar jpg/png/webp, maksimal 2 MB
-            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'image' => ['nullable', 'file', 'image', 'mimes:jpg,jpeg,png,webp', 'mimetypes:image/jpeg,image/png,image/webp', 'dimensions:min_width=100,min_height=100,max_width=6000,max_height=6000', 'max:2048'],
         ];
     }
 
