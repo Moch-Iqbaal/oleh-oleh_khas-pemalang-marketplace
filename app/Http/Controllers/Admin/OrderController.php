@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class OrderController extends Controller
@@ -26,6 +27,8 @@ class OrderController extends Controller
 
     public function updateStatus(Request $request, Transaction $transaction)
     {
+        Gate::authorize('updateStatus', $transaction);
+
         $data = $request->validate([
             'status' => ['required', Rule::in(Transaction::STATUSES)],
         ]);

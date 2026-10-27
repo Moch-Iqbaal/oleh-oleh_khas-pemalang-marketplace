@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class OrderController extends Controller
 {
@@ -17,9 +18,8 @@ class OrderController extends Controller
 
     public function show(Request $request, Transaction $transaction)
     {
-        if ($transaction->user_id !== $request->user()->id && $request->user()->role === 'customer') {
-            abort(403);
-        }
+        // Dicek lewat TransactionPolicy::view
+        Gate::authorize('view', $transaction);
 
         $transaction->load('items.product', 'user');
 
