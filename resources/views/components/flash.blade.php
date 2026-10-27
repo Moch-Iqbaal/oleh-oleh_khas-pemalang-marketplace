@@ -3,9 +3,9 @@
     @foreach (['success' => 'bg-emerald-600', 'error' => 'bg-rose-600'] as $type => $color)
         @if (session($type))
             <div class="toast pointer-events-auto flex items-start gap-3 rounded-2xl {{ $color }} px-4 py-3 text-sm font-medium text-white shadow-lg transition duration-500">
-                <span>{{ $type === 'success' ? '✓' : '!' }}</span>
+                <i class="fa-solid {{ $type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation' }}" aria-hidden="true"></i>
                 <p class="flex-1">{{ session($type) }}</p>
-                <button type="button" onclick="this.parentElement.remove()" class="opacity-70 hover:opacity-100" aria-label="Tutup">✕</button>
+                <button type="button" onclick="this.parentElement.remove()" class="opacity-70 hover:opacity-100" aria-label="Tutup"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
             </div>
         @endif
     @endforeach

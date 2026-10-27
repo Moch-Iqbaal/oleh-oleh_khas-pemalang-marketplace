@@ -14,7 +14,7 @@
                 <div>
                     <p class="font-bold">{{ $store->name }}</p>
                     <p class="text-sm text-stone-500">{{ $store->owner->name }} · {{ $store->owner->email }}</p>
-                    <p class="mt-1 text-sm text-stone-500">📍 {{ $store->address }} · 📞 {{ $store->phone }}</p>
+                    <p class="mt-1 text-sm text-stone-500"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{ $store->address }} · <i class="fa-solid fa-phone" aria-hidden="true"></i> {{ $store->phone }}</p>
                     <p class="mt-1 text-xs text-stone-400">{{ $store->products_count }} produk</p>
                 </div>
                 @if ($store->is_verified)

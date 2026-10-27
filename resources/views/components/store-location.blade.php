@@ -2,11 +2,11 @@
 {{-- Lokasi toko: peta OpenStreetMap (tanpa API key) + jarak dari lokasi pembeli --}}
 <div class="overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-stone-200/70">
     <div class="p-5">
-        <p class="font-semibold">📍 Lokasi toko</p>
+        <p class="font-semibold"><i class="fa-solid fa-location-dot text-rose-500" aria-hidden="true"></i> Lokasi toko</p>
         <p class="mt-1 text-sm text-stone-600">{{ $store->address }}</p>
         @if ($store->hasLocation())
             <p class="mt-2 text-sm font-semibold text-orange-600 js-distance" data-lat="{{ $store->latitude }}" data-lng="{{ $store->longitude }}">Menghitung jarak dari lokasi kamu...</p>
-            <a href="{{ $store->mapsUrl() }}" target="_blank" rel="noopener" class="mt-2 inline-block text-sm font-semibold text-emerald-700 hover:underline">Buka di Google Maps →</a>
+            <a href="{{ $store->mapsUrl() }}" target="_blank" rel="noopener" class="mt-2 inline-block text-sm font-semibold text-emerald-700 hover:underline">Buka di Google Maps <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
         @endif
     </div>
     @if ($store->hasLocation())

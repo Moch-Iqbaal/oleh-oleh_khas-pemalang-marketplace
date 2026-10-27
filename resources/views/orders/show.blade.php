@@ -7,7 +7,7 @@
             <div>
                 <p class="text-sm text-stone-500">Invoice</p>
                 <h1 class="text-2xl font-extrabold tracking-tight">{{ $order->invoice_code }}</h1>
-                <p class="mt-1 text-sm text-stone-600">🏪 {{ $order->store?->name }} · Pembeli: {{ $order->user->name }}</p>
+                <p class="mt-1 text-sm text-stone-600"><i class="fa-solid fa-store" aria-hidden="true"></i> {{ $order->store?->name }} · Pembeli: {{ $order->user->name }}</p>
                 <p class="text-sm text-stone-500">{{ $order->created_at->format('d M Y H:i') }}</p>
             </div>
             <x-status-badge :status="$order->status" />

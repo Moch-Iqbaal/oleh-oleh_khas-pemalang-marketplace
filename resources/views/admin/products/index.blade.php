@@ -26,7 +26,7 @@
                     <td class="px-5 py-3">
                         <div class="flex items-center gap-3">
                             <x-product-image :product="$product" class="h-10 !w-10 rounded-lg" />
-                            <div><p class="font-semibold">{{ $product->name }} @if ($product->is_featured)<span title="Unggulan">⭐</span>@endif</p><p class="text-xs text-stone-500">{{ $product->category->name }} · {{ $product->weight_grams }} g</p></div>
+                            <div><p class="font-semibold">{{ $product->name }} @if ($product->is_featured)<span title="Unggulan" class="text-amber-500"><i class="fa-solid fa-star" aria-hidden="true"></i><span class="sr-only">Unggulan</span></span>@endif</p><p class="text-xs text-stone-500">{{ $product->category->name }} · {{ $product->weight_grams }} g</p></div>
                         </div>
                     </td>
                     <td class="px-5 py-3">{{ $product->store?->name }}</td>

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('title', $category->exists ? 'Edit Kategori' : 'Tambah Kategori')
 @section('content')
-<a href="{{ route('admin.categories.index') }}" class="text-sm text-stone-500 hover:text-orange-600">← Kembali</a>
+<a href="{{ route('admin.categories.index') }}" class="text-sm text-stone-500 hover:text-orange-600"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Kembali</a>
 <h1 class="mt-2 text-3xl font-extrabold tracking-tight">{{ $category->exists ? 'Edit kategori' : 'Tambah kategori' }}</h1>
 <form method="POST" class="mt-6 max-w-lg space-y-4 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-stone-200/70"
       action="{{ $category->exists ? route('admin.categories.update', $category) : route('admin.categories.store') }}">

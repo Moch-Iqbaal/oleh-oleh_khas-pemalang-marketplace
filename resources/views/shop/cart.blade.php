@@ -5,7 +5,7 @@
     <h1 class="text-3xl font-extrabold tracking-tight">Keranjang</h1>
     @if ($products->isEmpty())
         <div class="mt-8 rounded-3xl bg-white p-12 text-center ring-1 ring-stone-200">
-            <p class="text-5xl">🧺</p>
+            <p class="text-5xl text-stone-300"><i class="fa-solid fa-basket-shopping" aria-hidden="true"></i></p>
             <p class="mt-4 text-stone-500">Keranjang masih kosong.</p>
             <a href="{{ route('home') }}" class="mt-6 inline-block rounded-full bg-orange-500 px-6 py-3 font-semibold text-white hover:bg-orange-600">Cari oleh-oleh</a>
         </div>
@@ -14,7 +14,7 @@
             <div class="space-y-6 lg:col-span-2">
                 @foreach ($groups as $items)
                     <div class="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-stone-200">
-                        <p class="border-b border-stone-100 bg-stone-50 px-5 py-3 text-sm font-semibold">🏪 {{ $items->first()->store->name }}</p>
+                        <p class="border-b border-stone-100 bg-stone-50 px-5 py-3 text-sm font-semibold"><i class="fa-solid fa-store text-stone-400" aria-hidden="true"></i> {{ $items->first()->store->name }}</p>
                         @foreach ($items as $product)
                             <div class="flex flex-wrap items-center gap-4 border-b border-stone-100 p-5 last:border-0">
                                 <x-product-image :product="$product" class="h-16 !w-16 rounded-xl" />
@@ -32,7 +32,7 @@
                                 <form action="{{ route('cart.remove', $product) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="rounded-full p-2 text-stone-400 hover:bg-rose-50 hover:text-rose-600" aria-label="Hapus">✕</button>
+                                    <button class="rounded-full p-2 text-stone-400 hover:bg-rose-50 hover:text-rose-600" aria-label="Hapus"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
                                 </form>
                             </div>
                         @endforeach

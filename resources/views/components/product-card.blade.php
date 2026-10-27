@@ -3,7 +3,7 @@
     <div class="relative overflow-hidden">
         <x-product-image :product="$product" class="h-44 transition duration-500 group-hover:scale-105" />
         @if ($product->is_featured)
-            <span class="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-orange-600 backdrop-blur">⭐ Unggulan</span>
+            <span class="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-orange-600 backdrop-blur"><i class="fa-solid fa-star" aria-hidden="true"></i> Unggulan</span>
         @endif
         @if ($product->stock < 1)
             <span class="absolute right-3 top-3 rounded-full bg-stone-900/80 px-2.5 py-1 text-xs font-semibold text-white">Habis</span>

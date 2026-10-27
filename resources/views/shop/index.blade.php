@@ -8,7 +8,7 @@
     <div class="absolute -bottom-32 left-10 h-80 w-80 rounded-full bg-rose-200/40 blur-3xl"></div>
     <div class="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:py-24">
         <div>
-            <span class="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-orange-700 ring-1 ring-orange-200">📍 Langsung dari UMKM Pemalang</span>
+            <span class="inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold text-orange-700 ring-1 ring-orange-200"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Langsung dari UMKM Pemalang</span>
             <h1 class="mt-5 text-4xl font-extrabold leading-tight tracking-tight text-stone-900 md:text-5xl">
                 Bawa pulang rasa <span class="bg-gradient-to-r from-orange-500 to-rose-600 bg-clip-text text-transparent">Pemalang</span>, ke mana pun kamu pergi.
             </h1>
@@ -71,7 +71,7 @@
     </form>
 
     @if ($featured->isNotEmpty())
-        <h2 class="mt-10 text-2xl font-extrabold tracking-tight">⭐ Produk unggulan</h2>
+        <h2 class="mt-10 text-2xl font-extrabold tracking-tight"><i class="fa-solid fa-star text-amber-500" aria-hidden="true"></i> Produk unggulan</h2>
         <div class="mt-5 grid grid-cols-2 gap-4 md:grid-cols-4">
             @foreach ($featured as $product)
                 <x-product-card :product="$product" />
@@ -102,7 +102,7 @@
                     <div class="flex items-center gap-3">
                         <x-store-avatar :store="$store" class="h-14 w-14 rounded-2xl text-lg" />
                         <div>
-                            <p class="font-semibold group-hover:text-orange-600">{{ $store->name }} <span class="text-emerald-600" title="Terverifikasi">✔</span></p>
+                            <p class="font-semibold group-hover:text-orange-600">{{ $store->name }} <span class="text-emerald-600" title="Terverifikasi"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span class="sr-only">Terverifikasi</span></span></p>
                             <p class="text-xs text-stone-500">{{ $store->address }}</p>
                         </div>
                     </div>

@@ -5,9 +5,9 @@
     <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-12 sm:flex-row sm:items-center">
         <x-store-avatar :store="$store" class="h-28 w-28 rounded-3xl text-3xl shadow-lg ring-4 ring-white" />
         <div>
-            <h1 class="text-3xl font-extrabold tracking-tight">{{ $store->name }} <span class="text-emerald-600" title="Terverifikasi">✔</span></h1>
+            <h1 class="text-3xl font-extrabold tracking-tight">{{ $store->name }} <span class="text-emerald-600" title="Terverifikasi"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span class="sr-only">Terverifikasi</span></span></h1>
             <p class="mt-1 text-stone-600">{{ $store->description }}</p>
-            <p class="mt-2 text-sm text-stone-500">📍 {{ $store->address }} · 📞 {{ $store->phone }}</p>
+            <p class="mt-2 text-sm text-stone-500"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{ $store->address }} · <i class="fa-solid fa-phone" aria-hidden="true"></i> {{ $store->phone }}</p>
         </div>
     </div>
 </section>

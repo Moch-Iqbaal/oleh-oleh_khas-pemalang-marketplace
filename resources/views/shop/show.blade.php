@@ -12,18 +12,18 @@
             <x-product-image :product="$product" class="h-80 md:h-[28rem]" />
         </div>
         <div>
-            <a href="{{ route('shop.store', $product->store) }}" class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-700 ring-1 ring-emerald-200 hover:bg-emerald-100">🏪 {{ $product->store->name }} ✔</a>
+            <a href="{{ route('shop.store', $product->store) }}" class="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-700 ring-1 ring-emerald-200 hover:bg-emerald-100"><i class="fa-solid fa-store" aria-hidden="true"></i> {{ $product->store->name }} <i class="fa-solid fa-circle-check" aria-hidden="true"></i></a>
             <h1 class="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">{{ $product->name }}</h1>
             <p class="mt-4 text-3xl font-extrabold text-orange-600">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
 
             <dl class="mt-6 grid grid-cols-3 gap-3 text-center text-sm">
-                <div class="rounded-2xl bg-white p-3 ring-1 ring-stone-200"><dt class="text-stone-500">Berat</dt><dd class="mt-1 font-bold">{{ $product->weight_grams }} g</dd></div>
-                <div class="rounded-2xl bg-white p-3 ring-1 ring-stone-200"><dt class="text-stone-500">Tahan</dt><dd class="mt-1 font-bold">{{ $product->shelf_life_days ? $product->shelf_life_days.' hari' : 'Tidak basi' }}</dd></div>
+                <div class="rounded-2xl bg-white p-3 ring-1 ring-stone-200"><dt class="text-stone-500"><i class="fa-solid fa-weight-hanging" aria-hidden="true"></i> Berat</dt><dd class="mt-1 font-bold">{{ $product->weight_grams }} g</dd></div>
+                <div class="rounded-2xl bg-white p-3 ring-1 ring-stone-200"><dt class="text-stone-500"><i class="fa-solid fa-clock" aria-hidden="true"></i> Tahan</dt><dd class="mt-1 font-bold">{{ $product->shelf_life_days ? $product->shelf_life_days.' hari' : 'Tidak basi' }}</dd></div>
                 <div class="rounded-2xl bg-white p-3 ring-1 ring-stone-200"><dt class="text-stone-500">Stok</dt><dd class="mt-1 font-bold">{{ $product->stock }}</dd></div>
             </dl>
 
             @if ($product->shelf_life_days && $product->shelf_life_days <= 7)
-                <p class="mt-4 rounded-2xl bg-amber-50 px-4 py-3 text-sm text-amber-800 ring-1 ring-amber-200">⏱️ Produk ini cepat basi. Cocok dibawa langsung, kurang cocok untuk kiriman jauh.</p>
+                <p class="mt-4 rounded-2xl bg-amber-50 px-4 py-3 text-sm text-amber-800 ring-1 ring-amber-200"><i class="fa-solid fa-clock" aria-hidden="true"></i> Produk ini cepat basi. Cocok dibawa langsung, kurang cocok untuk kiriman jauh.</p>
             @endif
 
             <p class="mt-6 leading-relaxed text-stone-600">{{ $product->description }}</p>

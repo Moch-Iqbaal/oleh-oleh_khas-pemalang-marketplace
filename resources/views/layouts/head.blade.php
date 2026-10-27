@@ -6,6 +6,7 @@
 <script>
     tailwind.config = { theme: { extend: { fontFamily: { sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'] } } } };
 </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/brand/icon_32.png') }}">
 <link rel="icon" type="image/png" sizes="64x64" href="{{ asset('images/brand/icon_64.png') }}">
 <link rel="apple-touch-icon" href="{{ asset('images/brand/icon_512.png') }}">

@@ -8,7 +8,7 @@
             <a href="{{ route('orders.show', $order) }}" class="flex flex-wrap items-center gap-4 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-stone-200 transition hover:shadow-md hover:ring-orange-300">
                 <div class="flex-1">
                     <p class="font-bold">{{ $order->invoice_code }}</p>
-                    <p class="text-sm text-stone-500">🏪 {{ $order->store?->name }} · {{ $order->created_at->format('d M Y H:i') }}</p>
+                    <p class="text-sm text-stone-500"><i class="fa-solid fa-store" aria-hidden="true"></i> {{ $order->store?->name }} · {{ $order->created_at->format('d M Y H:i') }}</p>
                 </div>
                 <x-status-badge :status="$order->status" />
                 <p class="w-32 text-right font-extrabold">Rp {{ number_format($order->total, 0, ',', '.') }}</p>

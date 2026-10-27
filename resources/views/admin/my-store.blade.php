@@ -5,7 +5,7 @@
 <h1 class="text-3xl font-extrabold tracking-tight">Profil toko</h1>
 <p class="mt-1 text-sm">Status:
     @if ($store->is_verified)
-        <span class="font-semibold text-emerald-600">Terverifikasi ✔</span> · <a href="{{ route('shop.store', $store) }}" class="text-orange-600">Lihat halaman toko →</a>
+        <span class="font-semibold text-emerald-600">Terverifikasi <i class="fa-solid fa-circle-check" aria-hidden="true"></i></span> · <a href="{{ route('shop.store', $store) }}" class="text-orange-600">Lihat halaman toko <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
     @else
         <span class="font-semibold text-amber-600">Menunggu verifikasi admin</span>
     @endif

@@ -2,7 +2,7 @@
 @section('title', $product->exists ? 'Edit Produk' : 'Tambah Produk')
 @section('content')
 @php $input = 'mt-1 w-full rounded-xl px-4 py-2.5 ring-1 ring-stone-200 focus:ring-2 focus:ring-orange-400'; @endphp
-<a href="{{ route('admin.products.index') }}" class="text-sm text-stone-500 hover:text-orange-600">← Kembali</a>
+<a href="{{ route('admin.products.index') }}" class="text-sm text-stone-500 hover:text-orange-600"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Kembali</a>
 <h1 class="mt-2 text-3xl font-extrabold tracking-tight">{{ $product->exists ? 'Edit produk' : 'Tambah produk' }}</h1>
 {{-- enctype wajib supaya file gambar ikut terkirim --}}
 <form method="POST" enctype="multipart/form-data" class="mt-6 grid gap-6 lg:grid-cols-3"
@@ -65,7 +65,7 @@
         </div>
         <label class="flex items-center gap-3 rounded-2xl bg-white p-6 text-sm font-semibold shadow-sm ring-1 ring-stone-200/70">
             <input type="checkbox" name="is_featured" value="1" @checked(old('is_featured', $product->is_featured)) class="h-5 w-5 rounded">
-            ⭐ Tampilkan sebagai produk unggulan
+            <i class="fa-solid fa-star text-amber-500" aria-hidden="true"></i> Tampilkan sebagai produk unggulan
         </label>
         <button class="w-full rounded-xl bg-orange-500 py-3 font-semibold text-white shadow-lg shadow-orange-500/30 hover:bg-orange-600">Simpan produk</button>
     </div>

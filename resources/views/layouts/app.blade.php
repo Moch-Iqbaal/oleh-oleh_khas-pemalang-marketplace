@@ -64,7 +64,7 @@
         <div>
             <p class="font-semibold">Punya usaha oleh-oleh?</p>
             <p class="mt-2 text-stone-500">Buka toko gratis dan jangkau pembeli dari luar kota.</p>
-            <a href="{{ route('register', ['jenis' => 'seller']) }}" class="mt-3 inline-block font-semibold text-orange-600 hover:underline">Daftar sebagai penjual →</a>
+            <a href="{{ route('register', ['jenis' => 'seller']) }}" class="mt-3 inline-block font-semibold text-orange-600 hover:underline">Daftar sebagai penjual <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
         </div>
     </div>
     <p class="border-t border-stone-100 py-4 text-center text-xs text-stone-400">© {{ date('Y') }} {{ config('app.name') }}</p>

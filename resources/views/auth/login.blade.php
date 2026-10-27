@@ -3,7 +3,7 @@
 @section('content')
 <div class="mx-auto max-w-md px-4 py-12">
     <div class="rounded-3xl bg-white p-8 shadow-xl shadow-stone-200/60 ring-1 ring-stone-200/70">
-        <h1 class="text-2xl font-extrabold tracking-tight">Selamat datang lagi 👋</h1>
+        <h1 class="text-2xl font-extrabold tracking-tight">Selamat datang lagi</h1>
         <p class="mt-1 text-sm text-stone-500">Masuk untuk lanjut belanja atau kelola tokomu.</p>
         <form action="{{ route('login') }}" method="POST" class="mt-6 space-y-4">
             @csrf
