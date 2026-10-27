@@ -9,9 +9,34 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Store extends Model
 {
-    protected $fillable = ['user_id', 'name', 'slug', 'description', 'address', 'phone', 'is_verified'];
+    protected $fillable = [
+        'user_id', 'name', 'slug', 'description', 'photo', 'address', 'latitude', 'longitude', 'phone', 'is_verified',
+    ];
 
-    protected $casts = ['is_verified' => 'boolean'];
+    protected $casts = [
+        'is_verified' => 'boolean',
+        'latitude' => 'float',
+        'longitude' => 'float',
+    ];
+
+    // Sama seperti Product::imageUrl(): foto seeder di public/images, foto upload di storage
+    public function photoUrl(): ?string
+    {
+        if (! $this->photo) {
+            return null;
+        }
+
+        if (str_starts_with($this->photo, 'images/')) {
+            return file_exists(public_path($this->photo)) ? asset($this->photo) : null;
+        }
+
+        return asset('storage/'.$this->photo);
+    }
+
+    public function hasLocation(): bool
+    {
+        return $this->latitude !== null && $this->longitude !== null;
+    }
 
     public function owner(): BelongsTo
     {

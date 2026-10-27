@@ -3,7 +3,7 @@
 @section('content')
 <section class="bg-gradient-to-br from-emerald-50 to-teal-50">
     <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-12 sm:flex-row sm:items-center">
-        <span class="grid h-20 w-20 shrink-0 place-items-center rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-600 text-3xl font-extrabold text-white shadow-lg">{{ mb_substr($store->name, 0, 1) }}</span>
+        <x-store-avatar :store="$store" class="h-28 w-28 rounded-3xl text-3xl shadow-lg ring-4 ring-white" />
         <div>
             <h1 class="text-3xl font-extrabold tracking-tight">{{ $store->name }} <span class="text-emerald-600" title="Terverifikasi">✔</span></h1>
             <p class="mt-1 text-stone-600">{{ $store->description }}</p>
@@ -11,6 +11,9 @@
         </div>
     </div>
 </section>
+<div class="mx-auto max-w-6xl px-4 pt-8">
+    <x-store-location :store="$store" />
+</div>
 <div class="mx-auto max-w-6xl px-4 py-10">
     <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
         @forelse ($products as $product)

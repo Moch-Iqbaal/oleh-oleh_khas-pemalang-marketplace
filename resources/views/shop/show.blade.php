@@ -28,6 +28,8 @@
 
             <p class="mt-6 leading-relaxed text-stone-600">{{ $product->description }}</p>
 
+            <div class="mt-6"><x-store-location :store="$product->store" /></div>
+
             <div class="mt-8">
                 @if ($product->stock > 0)
                     @auth
