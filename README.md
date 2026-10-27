@@ -45,14 +45,14 @@ Semua password: `password123`
 | Customer | customer@umkm.test | Pembeli |
 | Seller | seller@umkm.test | Camilan Mbok Darmi (terverifikasi) |
 | Seller | kopi@umkm.test | Kopi & Teh Lereng Moga (terverifikasi) |
-| Seller | batik@umkm.test | Batik Sekar Pemalang (terverifikasi) |
+| Seller | batik@umkm.test | Batik Canting Lestari (terverifikasi) |
 | Seller | comal@umkm.test | Dapur Oleh-Oleh Comal (terverifikasi) |
-| Seller | grombyang@umkm.test | Warung Grombyang & Kamir Kauman (terverifikasi) |
+| Seller | grombyang@umkm.test | Grombyang & Kamir Semeru (terverifikasi) |
 | Seller | aren@umkm.test | Gula Aren Lestari Watukumpul (terverifikasi) |
-| Seller | laut@umkm.test | Hasil Laut Ulujami (terverifikasi) |
+| Seller | laut@umkm.test | Hasil Laut Tanjungsari (terverifikasi) |
 | Seller | bambu@umkm.test | Anyaman Bambu Randudongkal (**belum** terverifikasi, untuk contoh alur verifikasi) |
 
-Nama toko di seeder fiktif. Koordinat toko adalah perkiraan pusat kecamatan (dari OpenStreetMap/Nominatim), bukan alamat usaha asli.
+Nama toko di seeder fiktif. Lokasi toko memakai tempat publik di sentra produk aslinya (pasar, desa sentra, TPI, jalan), bukan alamat usaha tertentu. Lihat bagian Sumber Data Riset.
 
 ## Instalasi Lokal
 
@@ -125,6 +125,37 @@ tests/Feature/ AuthTest, RoleAccessTest, SellerAccessTest, CheckoutTest
 
 Alur request: **Route** → **Middleware** (auth, role) → **Controller** (+ FormRequest, Policy) → **Model** (Eloquent ke MySQL) → **View** (Blade) → HTML.
 
+## Sumber Data Riset
+
+Nama toko dan pemilik di seeder **fiktif**. Jenis produk, kisaran harga, dan lokasi sentra diambil dari sumber publik berikut.
+
+**Lokasi toko** (titik tempat publik di sentra, koordinat dari OpenStreetMap/Nominatim, dicek dengan reverse geocode):
+
+| Toko (fiktif) | Sentra / tempat publik | Koordinat |
+|---|---|---|
+| Camilan Mbok Darmi | Desa Kalimas, Randudongkal (sentra IKM kerupuk keyel) | -7.0646606, 109.3095822 |
+| Kopi & Teh Lereng Moga | Pasar Moga, Jl. Raya Moga - Pulosari | -7.1235743, 109.2463483 |
+| Batik Canting Lestari | Desa Jebed Utara, Taman (desa sentra batik Pemalangan) | -6.9212860, 109.4167607 |
+| Dapur Oleh-Oleh Comal | Pasar Bantakan, Jl. Raya Pemalang - Pekalongan | -6.8707291, 109.5222769 |
+| Grombyang & Kamir Semeru | Jl. Semeru, Mulyoharjo (kampung asal kue kamir) | -6.8933948, 109.3839709 |
+| Gula Aren Lestari Watukumpul | Desa Bongas, Watukumpul (sentra gula aren) | -7.1904959, 109.4877398 |
+| Hasil Laut Tanjungsari | TPI Tanjungsari, Jl. Raya Tegal - Pemalang | -6.8685483, 109.3684456 |
+| Anyaman Bambu Randudongkal | Pasar Randudongkal | -7.1028686, 109.3248093 |
+
+**Produk dan harga:**
+
+- Nasi grombyang (isi, kuah kluwek, sejak ±1960-an, Rp16.000/porsi pada 2021): [jatengprov.go.id](https://jatengprov.go.id/beritaopd/masuk-warisan-budaya-ini-keistimewaan-nasi-grombyang-pemalang/), [Kompas](https://regional.kompas.com/read/2023/10/12/222712778/mengapa-pemalang-dijuluki-kota-grombyang)
+- Kue kamir (Kampung Arab Mulyoharjo, Jl. Semeru, Rp2.000/biji, awet ±4 hari): [pemalangkab.go.id](https://pemalangkab.go.id/2017/01/kuliner-pemalang-khamir-arab), [infopemalang.com](https://www.infopemalang.com/2021/04/jajanan-legendaris-kamir-khas-pemalang.html)
+- Kerupuk usek (digoreng pasir, Rp10.000–15.000/bungkus): [radarcbs.com](https://radarcbs.com/read/5122/daftar-kuliner-dan-oleh-oleh-khas-pemalang-yang-murah-mulai-rp10-ribuan)
+- Sentra kerupuk keyel Desa Kalimas, Randudongkal: [ANTARA Jateng](https://jateng.antaranews.com/berita/628555/kemenkum-jateng-dampingi-pembinaan-ki-merek-kolektif-kerupuk-keyel-di-pemalang)
+- Gula aren Bongas, Watukumpul (±Rp27.500/kg di produsen): [amunisi.co.id](https://amunisi.co.id/produk-gula-aren-bongas-masih-tradisional-tapi-asli-tanpa-campuran/)
+- Kopi robusta Pulosari (biji Rp48.000–50.000/kg di petani; bubuk Rp60.000–100.000/kg): [Disway Jateng](https://jateng.disway.id/disway-pekalongan/read/713129/harga-kopi-di-tingkat-petani-di-pemalang-anjlok), [Universitas Harkat Negeri](https://harkatnegeri.ac.id/berita/universitas-harkat-negeri-dampingi-petani-kopi-cikedung-pemalang-wujudkan-ekonomi-berdaya-melalui-hibah-kemendikti-saintek-68da6720bfb6d)
+- Manisan pepaya Moga, nanas madu, apem, semprong di gerai oleh-oleh PKK Pemalang: [Espos](https://regional.espos.id/cari-oleh-oleh-khas-pemalang-di-gerai-ini-lengkap-tersedia-1123842)
+- Sentra batik Pemalangan (Jebed Utara, Cibelok, motif Gemek Setekem, Sawat Rante, dll.): [Jurnal Tekstil (DOI 10.24821/jtks.v9i1.9393)](https://doi.org/10.24821/jtks.v9i1.9393), [Visit Jawa Tengah](https://visitjawatengah.jatengprov.go.id/en/shopping/batik-of-pemalang)
+- TPI Tanjungsari sebagai titik nelayan Pemalang: data OpenStreetMap
+
+Produk lain (kue kering, camilan, olahan laut) adalah produk lokal umum dengan harga perkiraan pasar, tidak diklaim sebagai "khas Pemalang".
+
 ## Kredit Gambar
 
 Foto produk di `public/images/products/`, foto toko di `public/images/stores/`, dan foto sorotan di `public/images/highlight/` diambil dari Wikimedia Commons, diperkecil ke lebar maks 800px dan dikonversi ke WebP. Foto bersifat ilustrasi (bukan foto produk asli toko).
@@ -132,11 +163,11 @@ Foto produk di `public/images/products/`, foto toko di `public/images/stores/`, 
 | File | Sumber | Pembuat | Lisensi |
 |---|---|---|---|
 | `grontol-jagung-gurih.webp` | [Grontol hariadhi.jpg](https://commons.wikimedia.org/wiki/File:Grontol_hariadhi.jpg) | Hariadhi | CC BY-SA 4.0 |
-| `kerupuk-pasir-usek-mentah.webp` | [Kerupuk Pasir.jpg](https://commons.wikimedia.org/wiki/File:Kerupuk_Pasir.jpg) | Ivuvisual | CC BY-SA 4.0 |
+| `kerupuk-usek-mentah.webp` | [Kerupuk Pasir.jpg](https://commons.wikimedia.org/wiki/File:Kerupuk_Pasir.jpg) | Ivuvisual | CC BY-SA 4.0 |
 | `keripik-tempe-renyah.webp` | [Keripik tempe.jpg](https://commons.wikimedia.org/wiki/File:Keripik_tempe.jpg) | Wiwik P | CC BY-SA 4.0 |
 | `emping-melinjo-mentah.webp` | [Emping blinjo Sidoarjo.jpg](https://commons.wikimedia.org/wiki/File:Emping_blinjo_Sidoarjo.jpg) | Midori | CC BY 3.0 |
-| `kopi-robusta-moga-bubuk-250g.webp` | [Coffee powdered.jpg](https://commons.wikimedia.org/wiki/File:Coffee_powdered.jpg) | Kulmalukko | CC BY-SA 3.0 |
-| `kopi-robusta-biji-sangrai-500g.webp` | [Roasted coffee beans.jpg](https://commons.wikimedia.org/wiki/File:Roasted_coffee_beans.jpg) | MarkSweep | Public domain |
+| `kopi-robusta-pulosari-bubuk-250g.webp` | [Coffee powdered.jpg](https://commons.wikimedia.org/wiki/File:Coffee_powdered.jpg) | Kulmalukko | CC BY-SA 3.0 |
+| `kopi-robusta-pulosari-biji-sangrai-500g.webp` | [Roasted coffee beans.jpg](https://commons.wikimedia.org/wiki/File:Roasted_coffee_beans.jpg) | MarkSweep | Public domain |
 | `teh-tubruk-melati-gaya-poci.webp` | [Teh Poci Gula Batu.jpg](https://commons.wikimedia.org/wiki/File:Teh_Poci_Gula_Batu.jpg) | Gunawan Kartapranata | CC BY-SA 4.0 |
 | `gula-batu-kristal-500g.webp` | [Kandiszucker -- 2018 -- 3588.jpg](https://commons.wikimedia.org/wiki/File:Kandiszucker_--_2018_--_3588.jpg) | Dietmar Rabich | CC BY-SA 4.0 |
 | `kain-batik-cap-motif-pemalangan.webp` | [Kain Batik Tulis Lasem Gringsing.jpg](https://commons.wikimedia.org/wiki/File:Kain_Batik_Tulis_Lasem_Gringsing.jpg) | Fredi2025 | CC BY-SA 4.0 |
@@ -190,13 +221,13 @@ Foto toko adalah suasana usaha/produksi (bukan foto pemilik toko yang fiktif).
 | File | Sumber | Pembuat | Lisensi |
 |---|---|---|---|
 | `stores/anyaman-bambu-randudongkal.webp` | [Anyaman bambu-Kalo.jpg](https://commons.wikimedia.org/wiki/File:Anyaman_bambu-Kalo.jpg) | Desa.gedangdowo | CC BY-SA 4.0 |
-| `stores/batik-sekar-pemalang.webp` | [Using canting to create batik (10684550014).jpg](https://commons.wikimedia.org/wiki/File:Using_canting_to_create_batik_(10684550014).jpg) | Ahmad Salman/AusAID | CC BY 2.0 |
+| `stores/batik-canting-lestari.webp` | [Using canting to create batik (10684550014).jpg](https://commons.wikimedia.org/wiki/File:Using_canting_to_create_batik_(10684550014).jpg) | Ahmad Salman/AusAID | CC BY 2.0 |
 | `stores/camilan-mbok-darmi.webp` | [Kerupuk Kulit Rambak Prabumulih.jpg](https://commons.wikimedia.org/wiki/File:Kerupuk_Kulit_Rambak_Prabumulih.jpg) | Nasywaaf | CC BY 4.0 |
 | `stores/dapur-oleh-oleh-comal.webp` | [Pembuat Dodol.jpg](https://commons.wikimedia.org/wiki/File:Pembuat_Dodol.jpg) | Arie Basuki | CC BY-SA 4.0 |
 | `stores/gula-aren-lestari-watukumpul.webp` | [Sang pembuat gula aren.jpg](https://commons.wikimedia.org/wiki/File:Sang_pembuat_gula_aren.jpg) | Iam.arianaga | CC BY-SA 4.0 |
-| `stores/hasil-laut-ulujami.webp` | [Dried fish at Fareniya Bazar, Indo Nepal Border Trail, Sonauli-IMG 7198.jpg](https://commons.wikimedia.org/wiki/File:Dried_fish_at_Fareniya_Bazar,_Indo_Nepal_Border_Trail,_Sonauli-IMG_7198.jpg) | Bijay Chaurasia | CC BY-SA 4.0 |
+| `stores/hasil-laut-tanjungsari.webp` | [Dried fish at Fareniya Bazar, Indo Nepal Border Trail, Sonauli-IMG 7198.jpg](https://commons.wikimedia.org/wiki/File:Dried_fish_at_Fareniya_Bazar,_Indo_Nepal_Border_Trail,_Sonauli-IMG_7198.jpg) | Bijay Chaurasia | CC BY-SA 4.0 |
 | `stores/kopi-teh-lereng-moga.webp` | [Kopi Luwak, Yogyakarta, Indonesia.jpg](https://commons.wikimedia.org/wiki/File:Kopi_Luwak,_Yogyakarta,_Indonesia.jpg) | Etsuma.W | CC BY-SA 4.0 |
-| `stores/warung-grombyang-kamir-kauman.webp` | [Kue Samir 2.jpg](https://commons.wikimedia.org/wiki/File:Kue_Samir_2.jpg) | Gunawan Kartapranata | CC BY-SA 4.0 |
+| `stores/grombyang-kamir-semeru.webp` | [Kue Samir 2.jpg](https://commons.wikimedia.org/wiki/File:Kue_Samir_2.jpg) | Gunawan Kartapranata | CC BY-SA 4.0 |
 | `highlight/nasi-grombyang.webp` | [Sega Grombyang.jpg](https://commons.wikimedia.org/wiki/File:Sega_Grombyang.jpg) | Ronald Sumardi | CC BY 4.0 |
 
 Lisensi CC BY / CC BY-SA mewajibkan atribusi; gambar yang diperkecil termasuk karya turunan dan dibagikan dengan lisensi yang sama.
