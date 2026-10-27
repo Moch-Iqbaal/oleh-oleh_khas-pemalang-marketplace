@@ -21,42 +21,49 @@ class CheckoutController extends Controller
 
         try {
             // Semua langkah di dalam satu transaksi DB: kalau satu gagal, semuanya dibatalkan
-            $transaction = DB::transaction(function () use ($cart, $request) {
+            $transactions = DB::transaction(function () use ($cart, $request) {
                 // lockForUpdate mengunci baris produk sampai transaksi selesai,
                 // jadi dua customer tidak bisa membeli stok terakhir secara bersamaan
-                $products = Product::whereIn('id', array_keys($cart))->lockForUpdate()->get()->keyBy('id');
+                $products = Product::with('store')->whereIn('id', array_keys($cart))
+                    ->lockForUpdate()->get()->keyBy('id');
 
-                $total = 0;
                 foreach ($cart as $productId => $qty) {
                     $product = $products->get($productId);
-                    if (! $product) {
+                    if (! $product || ! $product->store?->is_verified) {
                         throw new RuntimeException('Ada produk di keranjang yang sudah tidak tersedia.');
                     }
                     if ($product->stock < $qty) {
                         throw new RuntimeException("Stok {$product->name} tidak cukup (sisa {$product->stock}).");
                     }
-                    $total += $product->price * $qty;
                 }
 
-                $transaction = Transaction::create([
-                    'user_id' => $request->user()->id,
-                    'invoice_code' => 'INV-'.now()->format('Ymd').'-'.Str::upper(Str::random(6)),
-                    'total' => $total,
-                    'status' => 'pending',
-                ]);
+                // Marketplace: satu pesanan (invoice) untuk setiap toko
+                $created = [];
+                foreach ($products->groupBy('store_id') as $storeId => $storeProducts) {
+                    $total = $storeProducts->sum(fn ($p) => $p->price * $cart[$p->id]);
 
-                foreach ($cart as $productId => $qty) {
-                    $product = $products->get($productId);
-                    // Simpan harga saat ini sebagai snapshot
-                    $transaction->items()->create([
-                        'product_id' => $product->id,
-                        'qty' => $qty,
-                        'price' => $product->price,
+                    $transaction = Transaction::create([
+                        'user_id' => $request->user()->id,
+                        'store_id' => $storeId,
+                        'invoice_code' => 'INV-'.now()->format('Ymd').'-'.Str::upper(Str::random(6)),
+                        'total' => $total,
+                        'status' => 'pending',
                     ]);
-                    $product->decrement('stock', $qty);
+
+                    foreach ($storeProducts as $product) {
+                        // Simpan harga saat ini sebagai snapshot
+                        $transaction->items()->create([
+                            'product_id' => $product->id,
+                            'qty' => $cart[$product->id],
+                            'price' => $product->price,
+                        ]);
+                        $product->decrement('stock', $cart[$product->id]);
+                    }
+
+                    $created[] = $transaction;
                 }
 
-                return $transaction;
+                return $created;
             });
         } catch (RuntimeException $e) {
             return redirect()->route('cart.index')->with('error', $e->getMessage());
@@ -64,7 +71,13 @@ class CheckoutController extends Controller
 
         $request->session()->forget('cart');
 
-        return redirect()->route('orders.show', $transaction)
-            ->with('success', "Pesanan {$transaction->invoice_code} berhasil dibuat.");
+        $count = count($transactions);
+        if ($count === 1) {
+            return redirect()->route('orders.show', $transactions[0])
+                ->with('success', "Pesanan {$transactions[0]->invoice_code} berhasil dibuat.");
+        }
+
+        return redirect()->route('orders.index')
+            ->with('success', "Checkout berhasil: {$count} pesanan dibuat, satu untuk setiap toko.");
     }
 }

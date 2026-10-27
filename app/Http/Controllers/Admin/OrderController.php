@@ -12,10 +12,13 @@ class OrderController extends Controller
 {
     public function index(Request $request)
     {
+        $user = $request->user();
         $status = $request->query('status');
         $search = $request->query('q');
 
-        $orders = Transaction::with('user')
+        $orders = Transaction::with('user', 'store')
+            // Seller hanya melihat pesanan untuk tokonya
+            ->when($user->isSeller(), fn ($q) => $q->where('store_id', $user->store?->id))
             ->when($status, fn ($q) => $q->where('status', $status))
             ->when($search, fn ($q) => $q->where('invoice_code', 'like', "%{$search}%"))
             ->latest()

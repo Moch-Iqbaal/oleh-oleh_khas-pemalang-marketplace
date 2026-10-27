@@ -11,7 +11,7 @@ class OrderController extends Controller
     // Riwayat pesanan milik customer yang sedang login saja
     public function index(Request $request)
     {
-        $orders = $request->user()->transactions()->latest()->paginate(10);
+        $orders = $request->user()->transactions()->with('store')->latest()->paginate(10);
 
         return view('orders.index', compact('orders'));
     }
@@ -21,7 +21,7 @@ class OrderController extends Controller
         // Dicek lewat TransactionPolicy::view
         Gate::authorize('view', $transaction);
 
-        $transaction->load('items.product', 'user');
+        $transaction->load('items.product', 'user', 'store');
 
         return view('orders.show', ['order' => $transaction]);
     }

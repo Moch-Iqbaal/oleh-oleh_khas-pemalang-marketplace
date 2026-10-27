@@ -7,19 +7,27 @@ use App\Models\User;
 
 class TransactionPolicy
 {
-    // Customer hanya boleh melihat pesanannya sendiri; admin & staff boleh semua
+    // Lihat pesanan: admin/staff semua, seller pesanan tokonya, customer pesanannya sendiri
     public function view(User $user, Transaction $transaction): bool
     {
-        if ($user->isAdmin() || $user->isStaff()) {
+        if ($user->isPlatformStaff()) {
             return true;
+        }
+
+        if ($user->isSeller()) {
+            return $user->store && $transaction->store_id === $user->store->id;
         }
 
         return $transaction->user_id === $user->id;
     }
 
-    // Mengubah status pesanan hanya admin & staff
+    // Ubah status: admin/staff, atau seller pemilik toko pesanan tersebut
     public function updateStatus(User $user, Transaction $transaction): bool
     {
-        return $user->isAdmin() || $user->isStaff();
+        if ($user->isPlatformStaff()) {
+            return true;
+        }
+
+        return $user->isSeller() && $user->store && $transaction->store_id === $user->store->id;
     }
 }

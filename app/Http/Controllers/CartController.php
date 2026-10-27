@@ -14,15 +14,19 @@ class CartController extends Controller
     public function index(Request $request)
     {
         $cart = $request->session()->get('cart', []);
-        $products = Product::whereIn('id', array_keys($cart))->get();
+        $products = Product::visible()->with('store')->whereIn('id', array_keys($cart))->get();
 
         $total = $products->sum(fn ($p) => $p->price * $cart[$p->id]);
+        // Dikelompokkan per toko karena checkout akan dipecah per toko
+        $groups = $products->groupBy('store_id');
 
-        return view('shop.cart', compact('cart', 'products', 'total'));
+        return view('shop.cart', compact('cart', 'products', 'groups', 'total'));
     }
 
     public function add(Request $request, Product $product)
     {
+        abort_unless($product->store?->is_verified, 404);
+
         $data = $request->validate([
             'qty' => ['required', 'integer', 'min:1', 'max:100'],
         ]);

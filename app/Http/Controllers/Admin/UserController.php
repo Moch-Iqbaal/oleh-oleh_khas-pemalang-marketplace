@@ -27,7 +27,7 @@ class UserController extends Controller
     public function updateRole(Request $request, User $user)
     {
         $data = $request->validate([
-            'role' => ['required', Rule::in(['admin', 'staff', 'customer'])],
+            'role' => ['required', Rule::in(['admin', 'staff', 'seller', 'customer'])],
         ]);
 
         // Admin tidak boleh menurunkan role dirinya sendiri, biar tidak terkunci dari panel admin
