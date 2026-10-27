@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Support\Input;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,11 +12,11 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->query('q');
+        $search = Input::text($request->query('q'));
 
         $users = User::query()
             ->when($search, fn ($q) => $q->where(function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")->orWhere('email', 'like', "%{$search}%");
+                $q->where('name', 'like', Input::like($search))->orWhere('email', 'like', Input::like($search));
             }))
             ->orderBy('name')
             ->paginate(10)

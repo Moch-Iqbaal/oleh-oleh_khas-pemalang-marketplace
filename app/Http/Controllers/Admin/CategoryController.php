@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Support\Input;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
@@ -11,10 +12,10 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->query('q');
+        $search = Input::text($request->query('q'));
 
         $categories = Category::withCount('products')
-            ->when($search, fn ($q) => $q->where('name', 'like', "%{$search}%"))
+            ->when($search, fn ($q) => $q->where('name', 'like', Input::like($search)))
             ->orderBy('name')
             ->paginate(10)
             ->withQueryString();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Support\Input;
 use App\Http\Controllers\Controller;
 use App\Models\Store;
 use App\Models\User;
@@ -21,6 +22,7 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
+        $request->merge(collect($request->only('name', 'store_name', 'store_address'))->map(fn ($v) => Input::clean($v))->all());
         $data = $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'email', 'max:150', 'unique:users,email'],

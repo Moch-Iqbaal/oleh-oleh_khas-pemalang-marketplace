@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Support\Input;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -13,14 +14,15 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $status = $request->query('status');
-        $search = $request->query('q');
+        // Filter status di-whitelist, nilai lain diabaikan
+        $status = in_array($request->query('status'), Transaction::STATUSES, true) ? $request->query('status') : null;
+        $search = Input::text($request->query('q'));
 
         $orders = Transaction::with('user', 'store')
             // Seller hanya melihat pesanan untuk tokonya
             ->when($user->isSeller(), fn ($q) => $q->where('store_id', $user->store?->id))
             ->when($status, fn ($q) => $q->where('status', $status))
-            ->when($search, fn ($q) => $q->where('invoice_code', 'like', "%{$search}%"))
+            ->when($search, fn ($q) => $q->where('invoice_code', 'like', Input::like($search)))
             ->latest()
             ->paginate(15)
             ->withQueryString();

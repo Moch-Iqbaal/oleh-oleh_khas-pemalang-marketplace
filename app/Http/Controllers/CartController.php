@@ -46,6 +46,7 @@ class CartController extends Controller
 
     public function update(Request $request, Product $product)
     {
+        abort_unless($product->store?->is_verified, 404);
         $data = $request->validate([
             'qty' => ['required', 'integer', 'min:1', 'max:100'],
         ]);

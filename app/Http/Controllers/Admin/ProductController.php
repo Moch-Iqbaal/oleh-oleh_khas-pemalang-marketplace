@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Support\Input;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
@@ -16,13 +17,13 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $search = $request->query('q');
+        $search = Input::text($request->query('q'));
         $categoryId = $request->query('category');
 
         $products = Product::with('category', 'store')
             // Seller hanya melihat produk tokonya sendiri
             ->when($user->isSeller(), fn ($q) => $q->where('store_id', $user->store?->id))
-            ->when($search, fn ($q) => $q->where('name', 'like', "%{$search}%"))
+            ->when($search, fn ($q) => $q->where('name', 'like', Input::like($search)))
             ->when($categoryId, fn ($q) => $q->where('category_id', $categoryId))
             ->latest()
             ->paginate(10)

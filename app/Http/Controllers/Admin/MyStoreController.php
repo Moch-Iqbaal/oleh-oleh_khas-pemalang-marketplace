@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Support\Input;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -21,6 +22,7 @@ class MyStoreController extends Controller
     {
         $store = $request->user()->store ?? abort(404);
 
+        $request->merge(collect($request->only('name', 'description', 'place_name', 'address'))->map(fn ($v) => Input::clean($v))->all());
         $data = $request->validate([
             'name' => ['required', 'string', 'min:3', 'max:100', Rule::unique('stores', 'name')->ignore($store->id)],
             'description' => ['nullable', 'string', 'max:1000'],

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\Input;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
@@ -11,11 +12,11 @@ class ShopController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->query('q');
-        $categorySlug = $request->query('kategori');
+        $search = Input::text($request->query('q'));
+        $categorySlug = Input::text($request->query('kategori'));
 
         $products = Product::visible()->with('category', 'store')
-            ->when($search, fn ($q) => $q->where('name', 'like', "%{$search}%"))
+            ->when($search, fn ($q) => $q->where('name', 'like', Input::like($search)))
             ->when($categorySlug, fn ($q) => $q->whereHas('category', fn ($c) => $c->where('slug', $categorySlug)))
             ->latest()
             ->paginate(12)

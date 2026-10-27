@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Support\Input;
 use App\Http\Controllers\Controller;
 use App\Models\Store;
 use Illuminate\Http\Request;
@@ -11,10 +12,10 @@ class StoreController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->query('q');
+        $search = Input::text($request->query('q'));
 
         $stores = Store::with('owner')->withCount('products')
-            ->when($search, fn ($q) => $q->where('name', 'like', "%{$search}%"))
+            ->when($search, fn ($q) => $q->where('name', 'like', Input::like($search)))
             ->orderBy('is_verified')
             ->orderBy('name')
             ->paginate(10)
