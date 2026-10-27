@@ -26,10 +26,15 @@ class ShopController extends Controller
             ? collect()
             : Product::visible()->with('store')->where('is_featured', true)->take(4)->get();
 
+        // Sorotan khas Pemalang di beranda
+        $highlight = ($search || $categorySlug)
+            ? null
+            : Product::visible()->with('store')->where('slug', 'paket-nasi-grombyang-siap-saji')->first();
+
         $categories = Category::withCount(['products' => fn ($q) => $q->visible()])->orderBy('name')->get();
         $stores = Store::verified()->withCount('products')->orderBy('name')->get();
 
-        return view('shop.index', compact('products', 'featured', 'categories', 'stores', 'search', 'categorySlug'));
+        return view('shop.index', compact('products', 'featured', 'highlight', 'categories', 'stores', 'search', 'categorySlug'));
     }
 
     public function show(Product $product)

@@ -27,6 +27,53 @@ class ProductSeeder extends Seeder
             ['batik-sekar-pemalang', 'batik-pemalang', 'Selendang Batik Tulis', 210000, 6, 150, null, false, 'Selendang batik tulis halus, cocok untuk hadiah.'],
             ['dapur-oleh-oleh-comal', 'hampers-kue', 'Paket Hampers Oleh-Oleh Pemalang', 150000, 10, 1500, 30, false, 'Isi kerupuk, keripik, kopi, dan teh dalam besek bambu.'],
             ['dapur-oleh-oleh-comal', 'hampers-kue', 'Rengginang Ketan 250g', 17000, 30, 250, 60, false, 'Rengginang ketan mentah, tinggal goreng.'],
+
+            // Siap saji: Nasi Grombyang dan kue basah (tahan singkat)
+            ['warung-grombyang-kamir-kauman', 'siap-saji', 'Paket Nasi Grombyang Siap Saji', 45000, 20, 900, 3, true, 'Paket untuk 2 porsi: daging sapi, kuah kluwek berempah dalam kemasan terpisah, serundeng, dan bawang goreng. Simpan di kulkas, panaskan kuah sampai mendidih lalu siram ke nasi. Tahan 3 hari di kulkas.'],
+            ['warung-grombyang-kamir-kauman', 'hampers-kue', 'Kue Kamir Original isi 10', 25000, 30, 600, 4, true, 'Kue kamir khas Pemalang dari adonan terigu, telur, dan mentega dengan tape. Manis, legit, sedikit gosong di pinggir. Tahan sekitar 4 hari.'],
+            ['warung-grombyang-kamir-kauman', 'hampers-kue', 'Apem Kukus Daun Pisang', 15000, 25, 400, 2, false, 'Apem tepung beras dan santan yang dikukus beralas daun pisang. Isi 10.'],
+            ['warung-grombyang-kamir-kauman', 'hampers-kue', 'Kue Putu Ayu isi 12', 18000, 20, 350, 2, false, 'Kue putu ayu pandan dengan taburan kelapa parut.'],
+
+            ['dapur-oleh-oleh-comal', 'hampers-kue', 'Wajik Ketan Gula Merah', 22000, 25, 400, 7, false, 'Wajik dari beras ketan dan gula merah, legit dan wangi daun pandan.'],
+            ['dapur-oleh-oleh-comal', 'hampers-kue', 'Jenang Ketan Bungkus Klobot', 25000, 20, 500, 14, false, 'Jenang ketan santan gula merah, dibungkus kulit jagung (klobot).'],
+            ['dapur-oleh-oleh-comal', 'hampers-kue', 'Dodol Aneka Rasa 500g', 30000, 30, 500, 60, false, 'Dodol bungkus kecil rasa original, durian, dan nangka.'],
+            ['dapur-oleh-oleh-comal', 'hampers-kue', 'Kue Lidah Kucing Toples', 45000, 20, 300, 60, false, 'Kue kering lidah kucing tipis dan renyah dalam toples.'],
+            ['dapur-oleh-oleh-comal', 'hampers-kue', 'Nastar Selai Nanas Toples', 65000, 20, 400, 45, true, 'Nastar lembut dengan selai nanas buatan sendiri.'],
+            ['dapur-oleh-oleh-comal', 'hampers-kue', 'Kastengel Keju Toples', 70000, 15, 400, 45, false, 'Kastengel keju edam, gurih dan wangi.'],
+            ['dapur-oleh-oleh-comal', 'hampers-kue', 'Kembang Goyang Renyah', 25000, 30, 250, 60, false, 'Kembang goyang tepung beras, manis gurih.'],
+            ['dapur-oleh-oleh-comal', 'hampers-kue', 'Kue Satu Kacang Hijau', 20000, 30, 250, 30, false, 'Kue satu dari tepung kacang hijau yang dicetak dan dijemur.'],
+            ['dapur-oleh-oleh-comal', 'hampers-kue', 'Semprong Gulung Wijen', 28000, 25, 250, 60, false, 'Kue semprong gulung tipis dengan wijen.'],
+            ['dapur-oleh-oleh-comal', 'hampers-kue', 'Semprong Lipat Kelapa', 28000, 25, 250, 60, false, 'Semprong lipat dengan aroma kelapa.'],
+            ['dapur-oleh-oleh-comal', 'camilan-kerupuk', 'Kue Bawang Stik', 20000, 40, 250, 60, false, 'Stik bawang gurih untuk teman ngeteh.'],
+
+            ['camilan-mbok-darmi', 'camilan-kerupuk', 'Rempeyek Kacang Tanah', 20000, 40, 200, 30, false, 'Rempeyek tepung beras dengan kacang tanah, renyah dan gurih.'],
+            ['camilan-mbok-darmi', 'camilan-kerupuk', 'Kacang Bawang Gurih', 18000, 40, 250, 60, false, 'Kacang tanah kupas goreng dengan bawang putih.'],
+            ['camilan-mbok-darmi', 'camilan-kerupuk', 'Keripik Singkong Original', 15000, 50, 250, 60, false, 'Keripik singkong tipis, asin gurih.'],
+            ['camilan-mbok-darmi', 'camilan-kerupuk', 'Keripik Singkong Balado', 17000, 50, 250, 60, false, 'Keripik singkong dengan bumbu balado pedas manis.'],
+            ['camilan-mbok-darmi', 'camilan-kerupuk', 'Keripik Pisang Manis', 18000, 40, 250, 60, false, 'Keripik pisang tanduk dengan lapisan gula tipis.'],
+            ['camilan-mbok-darmi', 'camilan-kerupuk', 'Opak Singkong Bakar', 15000, 40, 250, 60, false, 'Opak singkong mentah, dibakar atau digoreng sebelum disantap.'],
+            ['camilan-mbok-darmi', 'camilan-kerupuk', 'Kerupuk Kulit Rambak', 25000, 30, 150, 60, false, 'Kerupuk kulit sapi yang renyah, cocok untuk teman makan.'],
+            ['camilan-mbok-darmi', 'camilan-kerupuk', 'Emping Jagung Manis', 16000, 40, 250, 60, false, 'Emping jagung pipih dengan rasa manis.'],
+            ['camilan-mbok-darmi', 'camilan-kerupuk', 'Kue Keciput Wijen', 20000, 30, 250, 60, false, 'Bola-bola kecil tepung ketan berbalut wijen.'],
+
+            ['kopi-teh-lereng-moga', 'gula-manisan', 'Manisan Pepaya Moga', 20000, 30, 250, 30, true, 'Manisan pepaya kering dari Moga, manis dan kenyal.'],
+            ['kopi-teh-lereng-moga', 'kopi-teh', 'Wedang Jahe Instan', 18000, 50, 200, 365, false, 'Serbuk jahe merah dan gula untuk wedang jahe hangat.'],
+            ['kopi-teh-lereng-moga', 'gula-manisan', 'Nanas Madu Pemalang', 15000, 40, 1200, 7, false, 'Nanas madu segar yang manis, harga per buah.'],
+
+            ['gula-aren-lestari-watukumpul', 'gula-manisan', 'Gula Aren Cetak Bongas 1kg', 30000, 50, 1000, 180, true, 'Gula aren padat dari Desa Bongas, Watukumpul. Dimasak dengan kayu bakar tanpa campuran, isi 5 linting.'],
+            ['gula-aren-lestari-watukumpul', 'gula-manisan', 'Gula Aren Cair 250ml', 25000, 40, 300, 180, false, 'Gula aren cair untuk kopi, es, dan kue.'],
+
+            ['hasil-laut-ulujami', 'olahan-laut', 'Ikan Asin Teri Nasi 250g', 30000, 30, 250, 90, false, 'Teri nasi asin kering, kecil dan gurih.'],
+            ['hasil-laut-ulujami', 'olahan-laut', 'Ikan Asin Jambal 250g', 40000, 25, 250, 90, false, 'Ikan asin jambal kering untuk digoreng atau dibakar.'],
+            ['hasil-laut-ulujami', 'olahan-laut', 'Terasi Udang Rebon', 15000, 40, 200, 180, false, 'Terasi dari udang rebon untuk sambal dan masakan.'],
+            ['hasil-laut-ulujami', 'olahan-laut', 'Kerupuk Udang Mentah 500g', 35000, 30, 500, 120, false, 'Kerupuk udang mentah, mekar besar saat digoreng.'],
+            ['hasil-laut-ulujami', 'olahan-laut', 'Abon Sapi 100g', 35000, 25, 100, 90, false, 'Abon daging sapi manis gurih.'],
+
+            ['batik-sekar-pemalang', 'batik-pemalang', 'Sarung Batik Cap', 135000, 15, 450, null, false, 'Sarung batik cap katun, nyaman untuk sehari-hari.'],
+            ['batik-sekar-pemalang', 'batik-pemalang', 'Kain Batik Tulis 2 Meter', 250000, 8, 400, null, false, 'Kain batik tulis halus, panjang 2 meter.'],
+            ['batik-sekar-pemalang', 'batik-pemalang', 'Blangkon Batik', 60000, 15, 150, null, false, 'Blangkon batik untuk acara adat atau koleksi.'],
+
+            ['anyaman-bambu-randudongkal', 'kerajinan-bambu', 'Bakul Anyaman Bambu', 35000, 20, 400, null, false, 'Bakul bambu anyaman tangan untuk nasi atau wadah serbaguna.'],
         ];
 
         foreach ($data as [$storeSlug, $categorySlug, $name, $price, $stock, $weight, $shelf, $featured, $description]) {

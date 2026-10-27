@@ -34,6 +34,25 @@
 </section>
 @endif
 
+@if ($highlight)
+{{-- Sorotan: Nasi Grombyang --}}
+<section class="mx-auto max-w-6xl px-4 pt-12">
+    <div class="grid overflow-hidden rounded-3xl bg-stone-900 text-white shadow-xl md:grid-cols-2">
+        <img src="{{ asset('images/highlight/nasi-grombyang.webp') }}" alt="Semangkuk nasi grombyang" class="h-64 w-full object-cover md:h-full" loading="lazy">
+        <div class="p-8 md:p-10">
+            <span class="rounded-full bg-orange-500/20 px-3 py-1 text-xs font-semibold text-orange-300 ring-1 ring-orange-400/40">Khas Pemalang</span>
+            <h2 class="mt-4 text-3xl font-extrabold tracking-tight">Nasi Grombyang</h2>
+            <p class="mt-3 leading-relaxed text-stone-300">Ikon kuliner Pemalang sejak sekitar 1960-an: nasi dan potongan daging (dulu kerbau, kini umumnya sapi) dalam kuah berbumbu kluwek dan rempah yang melimpah. Nama <em>grombyang</em> berarti “bergoyang”, karena nasinya seolah mengapung di kuah.</p>
+            <p class="mt-4 text-sm text-stone-400">Sekarang bisa dibawa pulang dalam paket siap saji dari {{ $highlight->store->name }}.</p>
+            <div class="mt-6 flex flex-wrap items-center gap-4">
+                <a href="{{ route('shop.show', $highlight) }}" class="rounded-full bg-orange-500 px-6 py-3 font-semibold text-white shadow-lg shadow-orange-500/30 hover:bg-orange-600">Lihat paket grombyang</a>
+                <span class="text-xl font-extrabold">Rp {{ number_format($highlight->price, 0, ',', '.') }}</span>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+
 <div id="produk" class="mx-auto max-w-6xl px-4 pt-10">
     {{-- Chip kategori --}}
     <div class="flex gap-2 overflow-x-auto pb-2">
@@ -81,7 +100,7 @@
             @foreach ($stores as $store)
                 <a href="{{ route('shop.store', $store) }}" class="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-stone-200/70 transition hover:-translate-y-1 hover:shadow-lg">
                     <div class="flex items-center gap-3">
-                        <span class="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-lg font-extrabold text-white">{{ mb_substr($store->name, 0, 1) }}</span>
+                        <x-store-avatar :store="$store" class="h-14 w-14 rounded-2xl text-lg" />
                         <div>
                             <p class="font-semibold group-hover:text-orange-600">{{ $store->name }} <span class="text-emerald-600" title="Terverifikasi">✔</span></p>
                             <p class="text-xs text-stone-500">{{ $store->address }}</p>
