@@ -1,58 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# UMKM Shop — E-Commerce UMKM Lokal
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web e-commerce sederhana untuk UMKM lokal, dibuat dengan **Laravel** dan **MySQL** memakai pola **MVC**.
+Tugas UAS Web Application Development (WAD04), Universitas Cakrawala.
 
-## About Laravel
+## Fitur
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Registrasi, login, logout (session di-regenerate setelah login, login dibatasi 5 percobaan/menit)
+- Hak akses berbasis role: **admin**, **staff**, **customer** (middleware `role:`)
+- CRUD kategori dan produk (validasi FormRequest, upload gambar, slug unik, pencarian, pagination)
+- Toko: daftar produk per kategori, pencarian, detail produk
+- Keranjang belanja berbasis session
+- Checkout di dalam `DB::transaction` dengan `lockForUpdate` (cek stok aman dari race condition), kode invoice, snapshot harga, pengurangan stok
+- Riwayat pesanan customer, daftar pesanan + ubah status untuk admin/staff
+- Dashboard admin: total produk, customer, pesanan, pesanan pending, pendapatan, stok menipis
+- Keamanan: CSRF di semua form, escaping Blade `{{ }}`, query Eloquent (parameter binding), policy pesanan, halaman error 403/404/419/500, pesan validasi Bahasa Indonesia
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Hak Akses
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Fitur | Admin | Staff | Customer | Tamu |
+|---|:-:|:-:|:-:|:-:|
+| Lihat produk | ✅ | ✅ | ✅ | ✅ |
+| Keranjang & checkout | ❌ | ❌ | ✅ | ❌ |
+| Riwayat pesanan sendiri | — | — | ✅ | ❌ |
+| Dashboard admin | ✅ | ✅ | ❌ | ❌ |
+| CRUD kategori & produk | ✅ | ✅ | ❌ | ❌ |
+| Lihat & ubah status pesanan | ✅ | ✅ | ❌ | ❌ |
+| Kelola role user | ✅ | ❌ | ❌ | ❌ |
 
-## Learning Laravel
+## Akun Login (data seeder)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+| Role | Email | Password |
+|---|---|---|
+| Admin | admin@umkm.test | password123 |
+| Staff | staff@umkm.test | password123 |
+| Customer | customer@umkm.test | password123 |
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Instalasi Lokal
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Kebutuhan: PHP 8.2+, Composer, MySQL 8.
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <url-repo> umkm-shop
+cd umkm-shop
+composer install
+cp .env.example .env
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Buat database `umkm_shop` di MySQL, lalu sesuaikan `DB_USERNAME` dan `DB_PASSWORD` di `.env`.
 
-## Contributing
+```bash
+php artisan migrate --seed      # buat tabel + data dummy
+php artisan storage:link        # supaya gambar produk bisa diakses
+php artisan serve
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Buka http://127.0.0.1:8000.
 
-## Code of Conduct
+Alternatif tanpa migration: import `database/umkm_shop.sql` ke database `umkm_shop`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+mysql -u root -p umkm_shop < database/umkm_shop.sql
+```
 
-## Security Vulnerabilities
+Menjalankan test (memakai SQLite in-memory, tidak menyentuh database MySQL):
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+php artisan test
+```
 
-## License
+## Struktur Database
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- `users` (id, name, email, password, role)
+- `categories` (id, name, slug)
+- `products` (id, category_id → categories, name, slug, description, price, stock, image)
+- `transactions` (id, user_id → users, invoice_code, total, status)
+- `transaction_items` (id, transaction_id → transactions, product_id → products, qty, price = snapshot harga)
+
+## Struktur MVC
+
+```
+app/
+├── Http/
+│   ├── Controllers/
+│   │   ├── Auth/LoginController.php, RegisterController.php
+│   │   ├── Admin/DashboardController.php, CategoryController.php,
+│   │   │        ProductController.php, OrderController.php, UserController.php
+│   │   ├── ShopController.php       # daftar & detail produk
+│   │   ├── CartController.php       # keranjang (session)
+│   │   ├── CheckoutController.php   # proses checkout
+│   │   └── OrderController.php      # riwayat pesanan customer
+│   ├── Middleware/EnsureRole.php    # middleware role:admin,staff
+│   └── Requests/CategoryRequest.php, ProductRequest.php
+├── Models/User.php, Category.php, Product.php, Transaction.php, TransactionItem.php
+└── Policies/TransactionPolicy.php
+resources/views/                    # View (Blade)
+├── layouts/ (app, admin)
+├── auth/, shop/, orders/, admin/, errors/
+routes/web.php                       # Routing
+database/migrations, seeders, umkm_shop.sql
+tests/Feature/                       # AuthTest, RoleAccessTest, CheckoutTest
+```
+
+Alur request: **Route** (`routes/web.php`) → **Middleware** (auth, role) → **Controller** → **Model** (Eloquent ke MySQL) → **View** (Blade) → response HTML.
