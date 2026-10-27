@@ -16,7 +16,7 @@
             </span>
         </a>
         <form action="{{ route('home') }}" method="GET" class="ml-auto hidden flex-1 md:block md:max-w-sm">
-            <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari grontol, kopi, batik..."
+            <input type="search" name="q" value="{{ \App\Support\Input::text(request('q')) }}" placeholder="Cari grontol, kopi, batik..."
                    class="w-full rounded-full border-0 bg-stone-100 px-4 py-2 text-sm ring-1 ring-stone-200 focus:bg-white focus:ring-2 focus:ring-orange-400">
         </form>
         <nav class="ml-auto flex items-center gap-2 text-sm font-medium md:ml-0">
