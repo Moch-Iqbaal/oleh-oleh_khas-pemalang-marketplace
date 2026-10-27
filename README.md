@@ -243,3 +243,27 @@ Lisensi CC BY / CC BY-SA mewajibkan atribusi; gambar yang diperkecil termasuk ka
 | Grombyang & Kamir Semeru | Alun-Alun Pemalang | -6.8902901, 109.3806267 | OSM/Nominatim "Alun-Alun Pemalang" |
 | Gula Aren Lestari Watukumpul | Pasar Belik | -7.1870190, 109.3295400 | Listing Google Maps (exa.ai/library/place/gxv9lpw7nv7); pemalangkab.go.id, radarcbs.com |
 | Hasil Laut Tanjungsari | TPI Tanjungsari Pemalang | -6.8685483, 109.3684456 | OSM/Nominatim "TPI Tanjungsari Pemalang"; pemalangkab.go.id (Dinas Perikanan, 5 TPI); Disway Jateng |
+
+## Keamanan
+
+Ringkasan ancaman yang diperhitungkan dan cara aplikasi menangkalnya. Semua poin di bawah dicek oleh `tests/Feature/SecurityTest.php` (kecuali yang ditandai residual).
+
+| Ancaman | Mitigasi di aplikasi |
+| --- | --- |
+| XSS (Cross-Site Scripting) | Semua output Blade memakai `{{ }}` (auto-escape `htmlspecialchars`), tidak ada `{!! !!}`. Data ke JavaScript hanya lewat atribut `data-*` yang di-escape. Tag HTML dibuang (`strip_tags`) dari teks bebas (nama/deskripsi produk, kategori, profil toko, registrasi). Content-Security-Policy memakai nonce acak per request, jadi `<script>` sisipan dan handler inline (`onclick`, `onerror`) tidak dijalankan browser. |
+| SQL Injection | Semua query lewat Eloquent/Query Builder dengan parameter binding, tidak ada raw SQL dari input. Wildcard LIKE (`%`, `_`, `\`) di-escape (`App\Support\Input::like`). Parameter filter di-whitelist (status pesanan, role user, jenis akun). Parameter berbentuk array (`?q[]=`) diabaikan. |
+| SSRF (Server-Side Request Forgery) | Server tidak pernah mengambil URL dari input user: tidak ada `Http::`, `curl`, atau `file_get_contents` ke alamat dari request. Link Google Maps dibangun dari `place_name` yang hanya di-`rawurlencode` dan dibuka oleh browser pengguna, bukan server. Peta OSM berupa `<iframe>` di browser. |
+| CSRF | Middleware CSRF bawaan Laravel aktif di semua route web tanpa pengecualian. Semua form POST/PUT/PATCH/DELETE memakai `@csrf`, aksi hapus/ubah memakai method spoofing (`@method`). Cookie session `SameSite=Lax`. |
+| IDOR / akses tanpa hak | `ProductPolicy` (seller hanya produk tokonya), `TransactionPolicy` (customer hanya pesanannya, seller hanya pesanan tokonya), middleware `role:` untuk panel, kategori, verifikasi toko, dan role user. Produk dari toko belum terverifikasi dianggap 404. |
+| Mass assignment | `$fillable` di setiap model. `role` dan `is_verified` tidak pernah diambil dari request publik; `store_id` di form produk `prohibited` untuk seller. Hanya admin yang mengubah role dan verifikasi toko. |
+| Upload berbahaya | Hanya jpg/png/webp: dicek ekstensi, MIME asli dari isi file, harus gambar yang bisa dibaca dengan dimensi 100 sampai 6000 px, maksimal 2 MB. SVG dan PHP ditolak (termasuk PHP yang diganti nama jadi `.jpg`). Nama file diacak (`hashName`) sehingga tidak bisa path traversal. `storage/app/public/.htaccess` mematikan eksekusi script dan memasang `nosniff`. |
+| Brute force dan spam | Login: 5 percobaan gagal per email+IP per menit, plus 20 request/menit per IP. Register 5/menit, keranjang 60/menit, checkout 10/menit. Password di-hash bcrypt (12 rounds). |
+| Session hijacking / fixation | Session id diganti saat login, session di-invalidate dan token CSRF diganti saat logout. Cookie `HttpOnly`, `SameSite=Lax`, `Secure` otomatis di production, isi session dienkripsi (`SESSION_ENCRYPT=true` di `.env.example`). |
+| Clickjacking dan header | `X-Frame-Options: SAMEORIGIN`, `frame-ancestors 'self'`, `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `Permissions-Policy` (hanya geolocation untuk situs sendiri), HSTS saat diakses lewat https. |
+| Bocornya informasi error | Production wajib `APP_ENV=production` dan `APP_DEBUG=false` agar stack trace tidak tampil. |
+| Dependensi rentan | `composer audit` dijalankan; tidak ada advisory untuk paket yang terpasang. |
+
+Risiko yang masih ada (residual):
+- Tailwind dari CDN (`cdn.tailwindcss.com`) butuh `style-src 'unsafe-inline'`. Untuk production sebaiknya Tailwind di-build lewat Vite supaya style inline bisa dilarang, dan semua CDN dipasang dengan Subresource Integrity.
+- Header `nosniff` untuk file upload hanya terpasang otomatis lewat Apache (`.htaccess`). Di Nginx perlu `add_header X-Content-Type-Options nosniff;` di lokasi `/storage`. `php artisan serve` tidak memakai keduanya.
+- Belum ada verifikasi email dan 2FA untuk akun admin/seller.
