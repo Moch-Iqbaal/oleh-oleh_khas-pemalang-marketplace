@@ -10,8 +10,10 @@ class ProductRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        // Kepemilikan produk dicek di controller lewat ProductPolicy
-        return true;
+        // Cek kepemilikan sebelum validasi, supaya seller lain langsung dapat 403
+        $product = $this->route('product');
+
+        return $product ? $this->user()->can('update', $product) : true;
     }
 
     protected function prepareForValidation(): void

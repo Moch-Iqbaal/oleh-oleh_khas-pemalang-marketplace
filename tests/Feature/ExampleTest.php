@@ -11,6 +11,6 @@ class ExampleTest extends TestCase
 
     public function test_homepage_bisa_dibuka(): void
     {
-        $this->get('/')->assertOk()->assertSee('Produk UMKM Lokal');
+        $this->get('/')->assertOk()->assertSee('Semua oleh-oleh');
     }
 }
