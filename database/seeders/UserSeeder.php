@@ -15,7 +15,6 @@ class UserSeeder extends Seeder
             ['name' => 'Staff Moderator', 'email' => 'staff@umkm.test', 'role' => 'staff'],
             ['name' => 'Budi Perantau', 'email' => 'customer@umkm.test', 'role' => 'customer'],
             // Pemilik toko UMKM (lihat StoreSeeder)
-            ['name' => 'Bu Darmi', 'email' => 'seller@umkm.test', 'role' => 'seller'],
             ['name' => 'Pak Slamet', 'email' => 'kopi@umkm.test', 'role' => 'seller'],
             ['name' => 'Mbak Sekar', 'email' => 'batik@umkm.test', 'role' => 'seller'],
             ['name' => 'Mas Arif', 'email' => 'comal@umkm.test', 'role' => 'seller'],
