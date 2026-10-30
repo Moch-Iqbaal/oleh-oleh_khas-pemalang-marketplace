@@ -5,7 +5,7 @@
         ['#f97316', '#be123c'], ['#059669', '#0f766e'], ['#7c3aed', '#db2777'],
         ['#0284c7', '#4f46e5'], ['#ca8a04', '#c2410c'], ['#16a34a', '#65a30d'],
     ];
-    [$from, $to] = $palettes[crc32($product->name) % count($palettes)];
+    [$from, $to] = $palettes[abs(crc32($product->name)) % count($palettes)];
     $initial = mb_strtoupper(mb_substr($product->name, 0, 1));
     $gid = 'g'.$product->id;
 @endphp
