@@ -4,6 +4,21 @@ Marketplace oleh-oleh khas Pemalang. Beberapa UMKM bisa buka toko di sini dan ju
 
 Project ini dibuat untuk UAS Web Application Development (WAD04) Universitas Cakrawala. Pakai Laravel, MySQL, dan pola MVC.
 
+
+## Demo Live
+
+https://oleh-oleh-khas-pemalang-marketplace.wasmer.app
+
+## Screenshot
+
+| Beranda | Katalog |
+|---|---|
+| ![Beranda](docs/screenshots/01-beranda.jpg) | ![Katalog](docs/screenshots/02-katalog.jpg) |
+| **Detail Produk** | **Panel Admin** |
+| ![Detail produk](docs/screenshots/03-detail-produk.jpg) | ![Panel admin](docs/screenshots/05-panel-admin.jpg) |
+
+<p align="center"><img src="docs/screenshots/06-mobile.jpg" alt="Tampilan mobile" width="300"></p>
+
 ## Fitur
 
 - Daftar akun pembeli atau penjual, login, dan logout
